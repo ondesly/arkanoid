@@ -1,0 +1,5 @@
+.DS_Store
+/cocos2d
+/proj.ios_mac/.idea
+/proj.ios_mac/Arkanoid.xcodeproj/project.xcworkspace/xcuserdata/
+/proj.ios_mac/Arkanoid.xcodeproj/project.xcworkspace/contents.xcworkspacedata
