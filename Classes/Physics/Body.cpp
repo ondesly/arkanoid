@@ -31,7 +31,5 @@ bool ar::Body::init() {
         return false;
     }
 
-    setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
-
     return true;
 }

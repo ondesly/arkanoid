@@ -51,7 +51,7 @@ void ar::Physics::checkCollisions() {
 
 cocos2d::Vec2 ar::Physics::getCollisionResult(ar::Body *agent, ar::Body *obstacle) const {
     const auto &agentPos = agent->getPosition();
-    const auto &obstaclePos = obstacle->getPosition();
+    const auto obstaclePos = obstacle->getPosition() - obstacle->getContentSize() / 2;
     const auto &obstacleSize = obstacle->getContentSize();
 
     cocos2d::Vec2 nearest = agentPos;
