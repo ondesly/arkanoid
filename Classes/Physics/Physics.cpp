@@ -24,7 +24,7 @@ ar::Physics::~Physics() {
     cocos2d::Director::getInstance()->getScheduler()->unscheduleAllForTarget(this);
 }
 
-void ar::Physics::update(float dt) {
+void ar::Physics::update(float delta) {
     if (!mAgent) {
         return;
     }
@@ -40,7 +40,7 @@ void ar::Physics::updateAgent() {
 }
 
 void ar::Physics::checkCollisions() {
-    for (const auto &body : mBodies) {
+    for (const auto &body : mObstacles) {
         const auto result = getCollisionResult(mAgent, body);
 
         if (!result.equals(cocos2d::Vec2::ZERO)) {
@@ -94,6 +94,6 @@ void ar::Physics::registerAgent(ar::Agent *agent) {
     mAgent = agent;
 }
 
-void ar::Physics::registerBody(ar::Body *body) {
-    mBodies.push_back(body);
+void ar::Physics::registerObstacles(ar::Body *obstacle) {
+    mObstacles.push_back(obstacle);
 }

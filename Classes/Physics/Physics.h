@@ -25,17 +25,17 @@ namespace ar {
 
     public:
 
-        void update(float dt);
+        void update(float delta);
 
         void registerAgent(Agent *agent);
 
-        void registerBody(Body *body);
+        void registerObstacles(Body *obstacle);
 
     private:
 
         Agent *mAgent = nullptr;
 
-        std::vector<Body *> mBodies;
+        std::vector<Body *> mObstacles;
 
     private:
 
