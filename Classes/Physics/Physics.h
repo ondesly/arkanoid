@@ -12,8 +12,6 @@
 
 namespace ar {
 
-    class Agent;
-
     class Body;
 
     class Physics {
@@ -27,13 +25,13 @@ namespace ar {
 
         void update(float delta);
 
-        void registerAgent(Agent *agent);
+        void registerAgent(Body *agent);
 
-        void registerObstacles(Body *obstacle);
+        void registerObstacle(Body *obstacle);
 
     private:
 
-        std::vector<Agent *> mAgents;
+        std::vector<Body *> mAgents;
         std::vector<Body *> mObstacles;
 
     private:
@@ -42,7 +40,7 @@ namespace ar {
 
         void checkCollisions();
 
-        cocos2d::Vec2 getCollisionResult(Agent *agent, Body *obstacle) const;
+        cocos2d::Vec2 getCollisionResult(Body *agent, Body *obstacle) const;
 
     };
 

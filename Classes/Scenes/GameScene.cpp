@@ -42,14 +42,14 @@ bool ar::GameScene::init() {
     left->setPosition({100.F, (getContentSize().height - left->getContentSize().height) / 2});
     addChild(left);
 
-    mPhysics->registerBody(left);
+    mPhysics->registerObstacle(left);
 
     auto right = Body::create();
     right->setTextureRect(cocos2d::Rect(cocos2d::Vec2::ZERO, {10.F, getContentSize().height}));
     right->setPosition({getContentSize().width - 100.F, (getContentSize().height - right->getContentSize().height) / 2});
     addChild(right);
 
-    mPhysics->registerBody(right);
+    mPhysics->registerObstacle(right);
 
     const auto screen_diff = (getContentSize().height - getContentSize().width) / 2;
 
@@ -58,18 +58,18 @@ bool ar::GameScene::init() {
     bottom->setPosition({(getContentSize().width - bottom->getContentSize().width) / 2, screen_diff + 100.F});
     addChild(bottom);
 
-    mPhysics->registerBody(bottom);
+    mPhysics->registerObstacle(bottom);
 
     auto top = Body::create();
     top->setTextureRect(cocos2d::Rect(cocos2d::Vec2::ZERO, {getContentSize().width, 10.F}));
     top->setPosition({(getContentSize().width - bottom->getContentSize().width), getContentSize().height - screen_diff - 100.F});
     addChild(top);
 
-    mPhysics->registerBody(top);
+    mPhysics->registerObstacle(top);
 
     //
 
-    mBall = Agent::create();
+    mBall = Body::create();
     mBall->setTextureRect(cocos2d::Rect(cocos2d::Vec2::ZERO, {10.F, 10.F}));
     mBall->setPosition(getContentSize() / 2);
     addChild(mBall);

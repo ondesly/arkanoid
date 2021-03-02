@@ -24,7 +24,7 @@ namespace cocos2d {
 
 namespace ar {
 
-    class Agent;
+    class Body;
 
     class Physics;
 
@@ -43,7 +43,7 @@ namespace ar {
 
         cocos2d::EventListenerTouchOneByOne *mTouchListener;
 
-        Agent *mBall;
+        Body *mBall;
 
     private:
 

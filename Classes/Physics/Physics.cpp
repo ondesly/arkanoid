@@ -11,7 +11,6 @@
 #include <base/CCDirector.h>
 #include <base/CCScheduler.h>
 
-#include "Physics/Agent.h"
 #include "Physics/Body.h"
 
 #include "Physics.h"
@@ -50,7 +49,7 @@ void ar::Physics::checkCollisions() {
     }
 }
 
-cocos2d::Vec2 ar::Physics::getCollisionResult(ar::Agent *agent, ar::Body *obstacle) const {
+cocos2d::Vec2 ar::Physics::getCollisionResult(ar::Body *agent, ar::Body *obstacle) const {
     const auto &agentPos = agent->getPosition();
     const auto &obstaclePos = obstacle->getPosition();
     const auto &obstacleSize = obstacle->getContentSize();
@@ -83,17 +82,17 @@ cocos2d::Vec2 ar::Physics::getCollisionResult(ar::Agent *agent, ar::Body *obstac
     const cocos2d::Vec2 diff = agentPos - nearest;
     const float distance = std::sqrt(diff.x * diff.x + diff.y * diff.y);
 
-    if (distance <= agent->getRadius()) {
+    if (distance <= agent->getContentSize().width / 2) {
         return result;
     } else {
         return {};
     }
 }
 
-void ar::Physics::registerAgent(ar::Agent *agent) {
+void ar::Physics::registerAgent(ar::Body *agent) {
     mAgents.push_back(agent);
 }
 
-void ar::Physics::registerObstacles(ar::Body *obstacle) {
+void ar::Physics::registerObstacle(ar::Body *obstacle) {
     mObstacles.push_back(obstacle);
 }
