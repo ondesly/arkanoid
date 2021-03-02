@@ -23,9 +23,14 @@ namespace ar {
 
         void setVelocity(const cocos2d::Vec2 &velocity);
 
+        float getFriction() const;
+
+        void setFriction(float value);
+
     private:
 
         cocos2d::Vec2 mVelocity;
+        float mFriction = 0.F;
 
     };
 

@@ -24,6 +24,14 @@ void ar::Body::setVelocity(const cocos2d::Vec2 &velocity) {
     mVelocity = velocity;
 }
 
+float ar::Body::getFriction() const {
+    return mFriction;
+}
+
+void ar::Body::setFriction(float friction) {
+    mFriction = friction;
+}
+
 ar::RectangleBody *ar::RectangleBody::create() {
     auto body = new(std::nothrow) RectangleBody();
     if (body && body->init()) {

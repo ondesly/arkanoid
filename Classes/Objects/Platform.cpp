@@ -10,6 +10,7 @@
 
 namespace {
 
+    const float cFriction = 0.5F;
     const float cVelocity = 5.F;
 
     constexpr float get_sign(float value) {
@@ -32,6 +33,8 @@ bool ar::Platform::init() {
     if (!RectangleBody::init()) {
         return false;
     }
+
+    setFriction(cFriction);
 
     scheduleUpdate();
 

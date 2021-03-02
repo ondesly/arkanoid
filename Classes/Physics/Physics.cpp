@@ -47,7 +47,11 @@ void ar::Physics::checkCollisions() {
 
             if (!result.equals(cocos2d::Vec2::ZERO)) {
                 const auto &velocity = agent->getVelocity();
-                agent->setVelocity({velocity.x * result.x, velocity.y * result.y});
+                const auto &ob_velocity = obstacle->getVelocity();
+                const auto ob_friction = obstacle->getFriction();
+                agent->setVelocity({
+                        velocity.x * result.x + ob_velocity.x * ob_friction,
+                        velocity.y * result.y + ob_velocity.y * ob_friction});
             }
         }
     }
