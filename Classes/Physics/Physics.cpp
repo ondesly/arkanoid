@@ -39,7 +39,11 @@ void ar::Physics::updateAgents() {
 void ar::Physics::checkCollisions() {
     for (const auto &agent : mAgents) {
         for (const auto &obstacle : mObstacles) {
-            const auto result = getCollisionResult(agent, obstacle);
+            if (agent == obstacle) {
+                continue;
+            }
+
+            auto result = getCollisionResult(agent, obstacle);
 
             if (!result.equals(cocos2d::Vec2::ZERO)) {
                 const auto &velocity = agent->getVelocity();
