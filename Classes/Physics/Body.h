@@ -17,6 +17,8 @@ namespace ar {
 
         bool init() override;
 
+        virtual cocos2d::Vec2 getCollisionResult(Body *obstacle) const = 0;
+
         const cocos2d::Vec2 &getVelocity() const;
 
         void setVelocity(const cocos2d::Vec2 &velocity);
@@ -32,12 +34,20 @@ namespace ar {
 
         static RectangleBody *create();
 
+    public:
+
+        cocos2d::Vec2 getCollisionResult(Body *obstacle) const override;
+
     };
 
     class CircleBody : public Body {
     public:
 
         static CircleBody *create();
+
+    public:
+
+        cocos2d::Vec2 getCollisionResult(Body *obstacle) const override;
 
     };
 

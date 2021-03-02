@@ -40,8 +40,6 @@ namespace ar {
 
         void checkCollisions();
 
-        cocos2d::Vec2 getCollisionResult(Body *agent, Body *obstacle) const;
-
     };
 
 }

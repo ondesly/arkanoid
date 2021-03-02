@@ -43,53 +43,13 @@ void ar::Physics::checkCollisions() {
                 continue;
             }
 
-            auto result = getCollisionResult(agent, obstacle);
+            auto result = agent->getCollisionResult(obstacle);
 
             if (!result.equals(cocos2d::Vec2::ZERO)) {
                 const auto &velocity = agent->getVelocity();
                 agent->setVelocity({velocity.x * result.x, velocity.y * result.y});
             }
         }
-    }
-}
-
-cocos2d::Vec2 ar::Physics::getCollisionResult(ar::Body *agent, ar::Body *obstacle) const {
-    const auto &agentPos = agent->getPosition();
-    const auto obstaclePos = obstacle->getPosition() - obstacle->getContentSize() / 2;
-    const auto &obstacleSize = obstacle->getContentSize();
-
-    cocos2d::Vec2 nearest = agentPos;
-    cocos2d::Vec2 result{1.F, 1.F};
-
-    // Horizontal
-
-    if (agentPos.x < obstaclePos.x) {
-        nearest.x = obstaclePos.x;
-        result.x = -1.F;
-    } else if (agentPos.x > obstaclePos.x + obstacleSize.width) {
-        nearest.x = obstaclePos.x + obstacleSize.width;
-        result.x = -1.F;
-    }
-
-    // Vertical
-
-    if (agentPos.y < obstaclePos.y) {
-        nearest.y = obstaclePos.y;
-        result.y = -1.F;
-    } else if (agentPos.y > obstaclePos.y + obstacleSize.height) {
-        nearest.y = obstaclePos.y + obstacleSize.height;
-        result.y = -1.F;
-    }
-
-    // Distance
-
-    const cocos2d::Vec2 diff = agentPos - nearest;
-    const float distance = std::sqrt(diff.x * diff.x + diff.y * diff.y);
-
-    if (distance <= agent->getContentSize().width / 2) {
-        return result;
-    } else {
-        return {};
     }
 }
 
