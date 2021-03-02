@@ -10,6 +10,14 @@
 
 ar::Body *ar::Body::create() {
     auto body = new(std::nothrow) Body();
+
+const cocos2d::Vec2 &ar::Body::getVelocity() const {
+    return mVelocity;
+}
+
+void ar::Body::setVelocity(const cocos2d::Vec2 &velocity) {
+    mVelocity = velocity;
+}
     if (body && body->init()) {
         body->autorelease();
         return body;

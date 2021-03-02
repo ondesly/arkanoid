@@ -17,6 +17,14 @@ namespace ar {
 
         static Body *create();
 
+        const cocos2d::Vec2 &getVelocity() const;
+
+        void setVelocity(const cocos2d::Vec2 &velocity);
+
+    private:
+
+        cocos2d::Vec2 mVelocity;
+
     public:
 
         bool init() override;
