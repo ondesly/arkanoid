@@ -28,6 +28,8 @@ namespace ar {
 
     class Physics;
 
+    class Platform;
+
     class GameScene : public cocos2d::Scene {
     public:
 
@@ -44,6 +46,7 @@ namespace ar {
         cocos2d::EventListenerTouchOneByOne *mTouchListener;
 
         Body *mBall;
+        Platform *mPlatform;
 
     private:
 

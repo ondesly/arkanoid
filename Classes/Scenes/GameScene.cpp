@@ -10,6 +10,7 @@
 
 #include <base/CCEventListenerTouch.h>
 
+#include "Objects/Platform.h"
 #include "Physics/Body.h"
 #include "Physics/Physics.h"
 
@@ -50,13 +51,6 @@ bool ar::GameScene::init() {
 
     mPhysics->registerObstacle(right);
 
-    auto bottom = RectangleBody::create();
-    bottom->setTextureRect(cocos2d::Rect(cocos2d::Vec2::ZERO, {getContentSize().width, 10.F}));
-    bottom->setPosition({getContentSize().width / 2, 100.F});
-    addChild(bottom);
-
-    mPhysics->registerObstacle(bottom);
-
     auto top = RectangleBody::create();
     top->setTextureRect(cocos2d::Rect(cocos2d::Vec2::ZERO, {getContentSize().width, 10.F}));
     top->setPosition({getContentSize().width / 2, getContentSize().height - 100.F});
@@ -66,12 +60,27 @@ bool ar::GameScene::init() {
 
     //
 
+    mPlatform = Platform::create();
+    mPlatform->setTextureRect(cocos2d::Rect(cocos2d::Vec2::ZERO, {100.F, 20.F}));
+    mPlatform->setPosition(getContentSize() / 2);
+    addChild(mPlatform);
+
+    mPhysics->registerAgent(mPlatform);
+    mPhysics->registerObstacle(mPlatform);
+
+    //
+
     mBall = CircleBody::create();
     mBall->setTextureRect(cocos2d::Rect(cocos2d::Vec2::ZERO, {10.F, 10.F}));
-    mBall->setPosition(getContentSize() / 2);
+    mBall->setPosition({getContentSize().width / 2, getContentSize().height / 4 * 3});
     addChild(mBall);
 
     mPhysics->registerAgent(mBall);
+
+    std::default_random_engine gen{std::random_device{}()};
+    std::uniform_int_distribution<float> distrib{-5.F, 5.F};
+
+    mBall->setVelocity({distrib(gen), distrib(gen)});
 
     //
 
@@ -83,10 +92,8 @@ bool ar::GameScene::init() {
 }
 
 bool ar::GameScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unusedEvent) {
-    static std::default_random_engine gen{std::random_device{}()};
-    static std::uniform_int_distribution<float> distrib{-5.F, 5.F};
-
-    mBall->setVelocity({distrib(gen), distrib(gen)});
+    const auto location = touch->getLocation();
+    mPlatform->setTargetX(location.x);
 
     return true;
 }
