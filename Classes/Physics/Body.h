@@ -15,7 +15,7 @@ namespace ar {
     class Body : public cocos2d::Sprite {
     public:
 
-        static Body *create();
+        bool init() override;
 
         const cocos2d::Vec2 &getVelocity() const;
 
@@ -25,9 +25,19 @@ namespace ar {
 
         cocos2d::Vec2 mVelocity;
 
+    };
+
+    class RectangleBody : public Body {
     public:
 
-        bool init() override;
+        static RectangleBody *create();
+
+    };
+
+    class CircleBody : public Body {
+    public:
+
+        static CircleBody *create();
 
     };
 

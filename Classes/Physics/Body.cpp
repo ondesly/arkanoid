@@ -8,8 +8,13 @@
 
 #include "Body.h"
 
-ar::Body *ar::Body::create() {
-    auto body = new(std::nothrow) Body();
+bool ar::Body::init() {
+    if (!Sprite::init()) {
+        return false;
+    }
+
+    return true;
+}
 
 const cocos2d::Vec2 &ar::Body::getVelocity() const {
     return mVelocity;
@@ -18,6 +23,9 @@ const cocos2d::Vec2 &ar::Body::getVelocity() const {
 void ar::Body::setVelocity(const cocos2d::Vec2 &velocity) {
     mVelocity = velocity;
 }
+
+ar::RectangleBody *ar::RectangleBody::create() {
+    auto body = new(std::nothrow) RectangleBody();
     if (body && body->init()) {
         body->autorelease();
         return body;
@@ -26,10 +34,12 @@ void ar::Body::setVelocity(const cocos2d::Vec2 &velocity) {
     return nullptr;
 }
 
-bool ar::Body::init() {
-    if (!Sprite::init()) {
-        return false;
+ar::CircleBody *ar::CircleBody::create() {
+    auto body = new(std::nothrow) CircleBody();
+    if (body && body->init()) {
+        body->autorelease();
+        return body;
     }
-
-    return true;
+    CC_SAFE_DELETE(body);
+    return nullptr;
 }
