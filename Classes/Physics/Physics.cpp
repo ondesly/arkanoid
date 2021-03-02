@@ -25,56 +25,56 @@ ar::Physics::~Physics() {
 }
 
 void ar::Physics::update(float delta) {
-    if (!mAgent) {
-        return;
-    }
-
-    updateAgent();
+    updateAgents();
     checkCollisions();
 }
 
-void ar::Physics::updateAgent() {
-    const auto &pos = mAgent->getPosition();
-    const auto &velocity = mAgent->getVelocity();
-    mAgent->setPosition(pos + velocity);
+void ar::Physics::updateAgents() {
+    for (const auto &agent : mAgents) {
+        const auto &pos = agent->getPosition();
+        const auto &velocity = agent->getVelocity();
+        agent->setPosition(pos + velocity);
+    }
 }
 
 void ar::Physics::checkCollisions() {
-    for (const auto &body : mObstacles) {
-        const auto result = getCollisionResult(mAgent, body);
+    for (const auto &agent : mAgents) {
+        for (const auto &obstacle : mObstacles) {
+            const auto result = getCollisionResult(agent, obstacle);
 
-        if (!result.equals(cocos2d::Vec2::ZERO)) {
-            const auto &velocity = mAgent->getVelocity();
-            mAgent->setVelocity({velocity.x * result.x, velocity.y * result.y});
+            if (!result.equals(cocos2d::Vec2::ZERO)) {
+                const auto &velocity = agent->getVelocity();
+                agent->setVelocity({velocity.x * result.x, velocity.y * result.y});
+            }
         }
     }
 }
 
-cocos2d::Vec2 ar::Physics::getCollisionResult(ar::Agent *agent, ar::Body *body) const {
+cocos2d::Vec2 ar::Physics::getCollisionResult(ar::Agent *agent, ar::Body *obstacle) const {
     const auto &agentPos = agent->getPosition();
-    const auto &bodyPos = body->getPosition();
-    const auto &bodySize = body->getContentSize();
+    const auto &obstaclePos = obstacle->getPosition();
+    const auto &obstacleSize = obstacle->getContentSize();
 
     cocos2d::Vec2 nearest = agentPos;
     cocos2d::Vec2 result{1.F, 1.F};
 
     // Horizontal
 
-    if (agentPos.x < bodyPos.x) {
-        nearest.x = bodyPos.x;
+    if (agentPos.x < obstaclePos.x) {
+        nearest.x = obstaclePos.x;
         result.x = -1.F;
-    } else if (agentPos.x > bodyPos.x + bodySize.width) {
-        nearest.x = bodyPos.x + bodySize.width;
+    } else if (agentPos.x > obstaclePos.x + obstacleSize.width) {
+        nearest.x = obstaclePos.x + obstacleSize.width;
         result.x = -1.F;
     }
 
     // Vertical
 
-    if (agentPos.y < bodyPos.y) {
-        nearest.y = bodyPos.y;
+    if (agentPos.y < obstaclePos.y) {
+        nearest.y = obstaclePos.y;
         result.y = -1.F;
-    } else if (agentPos.y > bodyPos.y + bodySize.height) {
-        nearest.y = bodyPos.y + bodySize.height;
+    } else if (agentPos.y > obstaclePos.y + obstacleSize.height) {
+        nearest.y = obstaclePos.y + obstacleSize.height;
         result.y = -1.F;
     }
 
@@ -91,7 +91,7 @@ cocos2d::Vec2 ar::Physics::getCollisionResult(ar::Agent *agent, ar::Body *body) 
 }
 
 void ar::Physics::registerAgent(ar::Agent *agent) {
-    mAgent = agent;
+    mAgents.push_back(agent);
 }
 
 void ar::Physics::registerObstacles(ar::Body *obstacle) {

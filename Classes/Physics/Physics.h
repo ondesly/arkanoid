@@ -33,17 +33,16 @@ namespace ar {
 
     private:
 
-        Agent *mAgent = nullptr;
-
+        std::vector<Agent *> mAgents;
         std::vector<Body *> mObstacles;
 
     private:
 
-        void updateAgent();
+        void updateAgents();
 
         void checkCollisions();
 
-        cocos2d::Vec2 getCollisionResult(Agent *agent, Body *body) const;
+        cocos2d::Vec2 getCollisionResult(Agent *agent, Body *obstacle) const;
 
     };
 
