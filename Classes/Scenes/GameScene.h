@@ -8,9 +8,25 @@
 
 #pragma once
 
+#include <memory>
+
 #include <2d/CCScene.h>
 
+namespace cocos2d {
+
+    class Event;
+
+    class EventListenerTouchOneByOne;
+
+    class Touch;
+
+}
+
 namespace ar {
+
+    class Agent;
+
+    class Physics;
 
     class GameScene : public cocos2d::Scene {
     public:
@@ -20,6 +36,20 @@ namespace ar {
     public:
 
         bool init() override;
+
+    private:
+
+        std::unique_ptr<Physics> mPhysics;
+
+        cocos2d::EventListenerTouchOneByOne *mTouchListener;
+
+        Agent *mBall;
+
+    private:
+
+        void enableTouch();
+
+        bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unusedEvent);
 
     };
 
