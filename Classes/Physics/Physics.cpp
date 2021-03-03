@@ -45,6 +45,8 @@ void ar::Physics::checkCollisions() {
 
             if (agent->isCollided(obstacle)) {
                 agent->updateVelocityAfterCollision(obstacle);
+
+                obstacle->onCollision();
             }
         }
     }

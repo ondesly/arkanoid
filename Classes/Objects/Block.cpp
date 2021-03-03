@@ -42,6 +42,11 @@ void ar::Block::setType(size_t type) {
             setColor(cocos2d::Color3B::BLUE);
             break;
         default:
+            setVisible(false);
             break;
     }
+}
+
+void ar::Block::onCollision() {
+    setType(--mType);
 }

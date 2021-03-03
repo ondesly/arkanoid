@@ -21,6 +21,10 @@ namespace ar {
 
         virtual cocos2d::Vec2 getVelocityAfterCollision(Body *obstacle) const = 0;
 
+        virtual void onCollision();
+
+    public:
+
         void updatePosition();
 
         void updateVelocityAfterCollision(Body *obstacle);

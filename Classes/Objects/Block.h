@@ -21,6 +21,8 @@ namespace ar {
 
         bool init(size_t type);
 
+        void onCollision() override;
+
     private:
 
         size_t mType = 0;

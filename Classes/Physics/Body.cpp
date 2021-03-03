@@ -30,6 +30,10 @@ void ar::Body::updateVelocityAfterCollision(ar::Body *obstacle) {
     setVelocity(new_velocity.getNormalized());
 }
 
+void ar::Body::onCollision() {
+
+}
+
 float ar::Body::getSpeed() const {
     return mSpeed;
 }
