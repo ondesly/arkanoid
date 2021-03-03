@@ -47,9 +47,9 @@ void ar::Physics::checkCollisions() {
                 continue;
             }
 
-            auto result = agent->getCollisionVelocity(obstacle);
+            if (agent->isCollided(obstacle)) {
+                auto result = agent->getCollisionVelocity(obstacle);
 
-            if (!result.equals({})) {
                 const auto &velocity = agent->getVelocity();
                 const auto &ob_velocity = obstacle->getVelocity();
                 const auto ob_friction = obstacle->getFriction();

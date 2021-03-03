@@ -50,6 +50,10 @@ ar::RectangleBody *ar::RectangleBody::create() {
     return nullptr;
 }
 
+bool ar::RectangleBody::isCollided(ar::Body *obstacle) const {
+    return false;
+}
+
 cocos2d::Vec2 ar::RectangleBody::getCollisionVelocity(ar::Body *obstacle) const {
     return {};
 }
@@ -62,6 +66,19 @@ ar::CircleBody *ar::CircleBody::create() {
     }
     CC_SAFE_DELETE(body);
     return nullptr;
+}
+
+bool ar::CircleBody::isCollided(ar::Body *obstacle) const {
+    const auto &pos = getPosition();
+    const auto &obstacleSize = obstacle->getContentSize();
+    const auto obstaclePos = obstacle->getPosition() - obstacleSize / 2;
+
+    const cocos2d::Vec2 nearest{
+            std::max(std::min(pos.x, obstaclePos.x + obstacleSize.width), obstaclePos.x),
+            std::max(std::min(pos.y, obstaclePos.y + obstacleSize.height), obstaclePos.y)};
+
+    const auto distance = pos.getDistance(nearest);
+    return distance <= getContentSize().width / 2;
 }
 
 cocos2d::Vec2 ar::CircleBody::getCollisionVelocity(ar::Body *obstacle) const {
