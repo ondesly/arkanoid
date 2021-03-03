@@ -39,7 +39,7 @@ void ar::Physics::updateAgents() {
 void ar::Physics::checkCollisions() {
     for (const auto &agent : mAgents) {
         for (const auto &obstacle : mObstacles) {
-            if (agent == obstacle) {
+            if (agent == obstacle || !obstacle->isVisible()) {
                 continue;
             }
 
