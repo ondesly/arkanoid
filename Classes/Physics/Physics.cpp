@@ -45,15 +45,18 @@ void ar::Physics::checkCollisions() {
                 continue;
             }
 
-            auto result = agent->getCollisionResult(obstacle);
+            auto result = agent->getCollisionVelocity(obstacle);
 
-            if (!result.equals(cocos2d::Vec2::ZERO)) {
+            if (!result.equals({})) {
                 const auto &velocity = agent->getVelocity();
                 const auto &ob_velocity = obstacle->getVelocity();
                 const auto ob_friction = obstacle->getFriction();
-                agent->setVelocity({
-                        velocity.x * result.x + ob_velocity.x * ob_friction,
-                        velocity.y * result.y + ob_velocity.y * ob_friction});
+
+                const cocos2d::Vec2 new_velocity{
+                        velocity.x + result.x + ob_velocity.x * ob_friction,
+                        velocity.y + result.y + ob_velocity.y * ob_friction};
+
+                agent->setVelocity(new_velocity.getNormalized());
             }
         }
     }

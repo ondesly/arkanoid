@@ -50,7 +50,7 @@ ar::RectangleBody *ar::RectangleBody::create() {
     return nullptr;
 }
 
-cocos2d::Vec2 ar::RectangleBody::getCollisionResult(ar::Body *obstacle) const {
+cocos2d::Vec2 ar::RectangleBody::getCollisionVelocity(ar::Body *obstacle) const {
     return {};
 }
 
@@ -64,32 +64,33 @@ ar::CircleBody *ar::CircleBody::create() {
     return nullptr;
 }
 
-cocos2d::Vec2 ar::CircleBody::getCollisionResult(ar::Body *obstacle) const {
+cocos2d::Vec2 ar::CircleBody::getCollisionVelocity(ar::Body *obstacle) const {
     const auto &pos = getPosition();
+    const auto &velocity = getVelocity();
     const auto obstaclePos = obstacle->getPosition() - obstacle->getContentSize() / 2;
     const auto &obstacleSize = obstacle->getContentSize();
 
     cocos2d::Vec2 nearest = pos;
-    cocos2d::Vec2 result{1.F, 1.F};
+    cocos2d::Vec2 result;
 
     // Horizontal
 
     if (pos.x < obstaclePos.x) {
         nearest.x = obstaclePos.x;
-        result.x = -1.F;
+        result.x = -velocity.x * 2;
     } else if (pos.x > obstaclePos.x + obstacleSize.width) {
         nearest.x = obstaclePos.x + obstacleSize.width;
-        result.x = -1.F;
+        result.x = -velocity.x * 2;
     }
 
     // Vertical
 
     if (pos.y < obstaclePos.y) {
         nearest.y = obstaclePos.y;
-        result.y = -1.F;
+        result.y = -velocity.y * 2;
     } else if (pos.y > obstaclePos.y + obstacleSize.height) {
         nearest.y = obstaclePos.y + obstacleSize.height;
-        result.y = -1.F;
+        result.y = -velocity.y * 2;
     }
 
     // Distance

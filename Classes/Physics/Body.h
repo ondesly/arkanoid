@@ -17,7 +17,7 @@ namespace ar {
 
         bool init() override;
 
-        virtual cocos2d::Vec2 getCollisionResult(Body *obstacle) const = 0;
+        virtual cocos2d::Vec2 getCollisionVelocity(Body *obstacle) const = 0;
 
         float getSpeed() const;
 
@@ -46,7 +46,7 @@ namespace ar {
 
     public:
 
-        cocos2d::Vec2 getCollisionResult(Body *obstacle) const override;
+        cocos2d::Vec2 getCollisionVelocity(Body *obstacle) const override;
 
     };
 
@@ -57,7 +57,7 @@ namespace ar {
 
     public:
 
-        cocos2d::Vec2 getCollisionResult(Body *obstacle) const override;
+        cocos2d::Vec2 getCollisionVelocity(Body *obstacle) const override;
 
     };
 
