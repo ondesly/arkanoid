@@ -32,11 +32,7 @@ void ar::Physics::update(float delta) {
 
 void ar::Physics::updateAgents() {
     for (const auto &agent : mAgents) {
-        const auto &pos = agent->getPosition();
-        const auto &velocity = agent->getVelocity();
-        const auto speed = agent->getSpeed();
-
-        agent->setPosition(pos + velocity * speed);
+        agent->updatePosition();
     }
 }
 
@@ -48,13 +44,7 @@ void ar::Physics::checkCollisions() {
             }
 
             if (agent->isCollided(obstacle)) {
-                const auto velocity = agent->getVelocityAfterCollision(obstacle);
-
-                const auto &ob_velocity = obstacle->getVelocity();
-                const auto ob_friction = obstacle->getFriction();
-
-                const auto new_velocity = velocity + ob_velocity * ob_friction;
-                agent->setVelocity(new_velocity.getNormalized());
+                agent->updateVelocityAfterCollision(obstacle);
             }
         }
     }

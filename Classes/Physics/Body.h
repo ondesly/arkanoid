@@ -21,6 +21,10 @@ namespace ar {
 
         virtual cocos2d::Vec2 getVelocityAfterCollision(Body *obstacle) const = 0;
 
+        void updatePosition();
+
+        void updateVelocityAfterCollision(Body *obstacle);
+
         float getSpeed() const;
 
         void setSpeed(float speed);

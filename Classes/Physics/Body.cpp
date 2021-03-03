@@ -16,6 +16,20 @@ bool ar::Body::init() {
     return true;
 }
 
+void ar::Body::updatePosition() {
+    setPosition(getPosition() + mVelocity * mSpeed);
+}
+
+void ar::Body::updateVelocityAfterCollision(ar::Body *obstacle) {
+    const auto velocity = getVelocityAfterCollision(obstacle);
+
+    const auto &ob_velocity = obstacle->getVelocity();
+    const auto ob_friction = obstacle->getFriction();
+
+    const auto new_velocity = velocity + ob_velocity * ob_friction;
+    setVelocity(new_velocity.getNormalized());
+}
+
 float ar::Body::getSpeed() const {
     return mSpeed;
 }
