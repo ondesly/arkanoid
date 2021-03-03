@@ -17,7 +17,7 @@ namespace ar {
     class Physics {
     public:
 
-        Physics();
+        Physics(size_t ticksPerFrame);
 
         ~Physics();
 
@@ -30,6 +30,8 @@ namespace ar {
         void registerObstacle(Body *obstacle);
 
     private:
+
+        const size_t mTicksPerFrame;
 
         std::vector<Body *> mAgents;
         std::vector<Body *> mObstacles;

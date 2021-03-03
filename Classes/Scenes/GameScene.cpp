@@ -16,6 +16,12 @@
 
 #include "GameScene.h"
 
+namespace {
+
+    const size_t cPhysicsTicksPerFrame = 10;
+
+}
+
 ar::GameScene *ar::GameScene::create() {
     auto scene = new(std::nothrow) GameScene();
     if (scene && scene->init()) {
@@ -33,7 +39,7 @@ bool ar::GameScene::init() {
 
     //
 
-    mPhysics = std::make_unique<Physics>();
+    mPhysics = std::make_unique<Physics>(cPhysicsTicksPerFrame);
 
     //
 
@@ -77,7 +83,7 @@ bool ar::GameScene::init() {
 
     mPhysics->registerAgent(mBall);
 
-    mBall->setSpeed(5.F);
+    mBall->setSpeed(0.5F);
 
     std::default_random_engine gen{std::random_device{}()};
     std::uniform_real_distribution<float> distrib{-1.F, 1.F};

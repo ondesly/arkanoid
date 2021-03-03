@@ -15,7 +15,7 @@
 
 #include "Physics.h"
 
-ar::Physics::Physics() {
+ar::Physics::Physics(size_t ticksPerFrame) : mTicksPerFrame(ticksPerFrame) {
     cocos2d::Director::getInstance()->getScheduler()->scheduleUpdate(this, 0, false);
 }
 
@@ -24,8 +24,10 @@ ar::Physics::~Physics() {
 }
 
 void ar::Physics::update(float delta) {
-    updateAgents();
-    checkCollisions();
+    for (size_t i = 0; i < mTicksPerFrame; ++i) {
+        updateAgents();
+        checkCollisions();
+    }
 }
 
 void ar::Physics::updateAgents() {

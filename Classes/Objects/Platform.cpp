@@ -10,7 +10,7 @@
 
 namespace {
 
-    const float cSpeed = 5.F;
+    const float cSpeed = 0.4F;
     const float cFriction = 0.5F;
 
     constexpr float get_sign(float value) {
