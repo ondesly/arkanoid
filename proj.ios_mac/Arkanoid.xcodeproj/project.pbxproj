@@ -28,6 +28,7 @@
 		B13996BFB0CCB51671411E98 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B13997DADB4140C488A7EF5A /* GameScene.cpp */; };
 		B13997683C16F7A48296CB69 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B13999B7A117835E7BA572C8 /* Platform.cpp */; };
 		B1399C58A9EF38FF2C91982C /* Body.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1399F2F86FBFD67DA0EADBF /* Body.cpp */; };
+		B1399CAA144E233356614EA6 /* Block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1399D8EFB4568924CD7FE40 /* Block.cpp */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
@@ -90,12 +91,14 @@
 		9070539F2273805100ADB1F3 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		907053A02273805100ADB1F3 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
 		907053A12273805100ADB1F3 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
+		B1399204C3D7A746C646F411 /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
 		B13992A1738A693B55E5F9F1 /* Physics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Physics.cpp; sourceTree = "<group>"; };
 		B13994AFF400AF597B34934F /* Body.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Body.h; sourceTree = "<group>"; };
 		B13996F737E4824FBBA349A6 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		B139971C8FC10F33FE89F5E6 /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
 		B13997DADB4140C488A7EF5A /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
 		B13999B7A117835E7BA572C8 /* Platform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Platform.cpp; sourceTree = "<group>"; };
+		B1399D8EFB4568924CD7FE40 /* Block.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Block.cpp; sourceTree = "<group>"; };
 		B1399DD6F56E981E9060EB7F /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
 		B1399F2F86FBFD67DA0EADBF /* Body.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Body.cpp; sourceTree = "<group>"; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -235,6 +238,8 @@
 			children = (
 				B13999B7A117835E7BA572C8 /* Platform.cpp */,
 				B139971C8FC10F33FE89F5E6 /* Platform.h */,
+				B1399D8EFB4568924CD7FE40 /* Block.cpp */,
+				B1399204C3D7A746C646F411 /* Block.h */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -350,6 +355,7 @@
 				B1399C58A9EF38FF2C91982C /* Body.cpp in Sources */,
 				B13992ACCB54569B84D230C1 /* Physics.cpp in Sources */,
 				B13997683C16F7A48296CB69 /* Platform.cpp in Sources */,
+				B1399CAA144E233356614EA6 /* Block.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

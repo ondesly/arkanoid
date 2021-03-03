@@ -10,6 +10,7 @@
 
 #include <base/CCEventListenerTouch.h>
 
+#include "Objects/Block.h"
 #include "Objects/Platform.h"
 #include "Physics/Body.h"
 #include "Physics/Physics.h"
@@ -63,6 +64,24 @@ bool ar::GameScene::init() {
     addChild(top);
 
     mPhysics->registerObstacle(top);
+
+    //
+
+    std::default_random_engine gen{std::random_device{}()};
+    std::uniform_int_distribution<size_t> distrib{0, 2};
+
+    for (size_t i = 0; i < 10; ++i) {
+        for (size_t j = 0; j < 5; ++j) {
+            auto block = Block::create(distrib(gen));
+            block->setTextureRect(cocos2d::Rect(cocos2d::Vec2::ZERO, {50.F, 30.F}));
+            block->setPosition({
+                    140.F + i * (block->getContentSize().width + 2.F),
+                    getContentSize().height - 150.F - j * (block->getContentSize().height + 2.F)});
+            addChild(block);
+
+            mPhysics->registerObstacle(block);
+        }
+    }
 
     //
 
