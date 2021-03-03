@@ -19,6 +19,8 @@
 
 namespace {
 
+    const char *cBgTextureName = "bg";
+
     const size_t cPhysicsTicksPerFrame = 10;
 
 }
@@ -37,6 +39,10 @@ bool ar::GameScene::init() {
     if (!cocos2d::Scene::init()) {
         return false;
     }
+
+    //
+
+    addBackground();
 
     //
 
@@ -132,4 +138,13 @@ void ar::GameScene::enableTouch() {
     mTouchListener = cocos2d::EventListenerTouchOneByOne::create();
     mTouchListener->onTouchBegan = std::bind(&GameScene::onTouchBegan, this, std::placeholders::_1, std::placeholders::_2);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(mTouchListener, this);
+}
+
+void ar::GameScene::addBackground() {
+    auto bg = cocos2d::Sprite::createWithSpriteFrameName(cBgTextureName);
+    bg->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
+    bg->setTextureRect(cocos2d::Rect({}, getContentSize()));
+    addChild(bg);
+
+    bg->getTexture()->setTexParameters({GL_NEAREST, GL_NEAREST, GL_REPEAT, GL_REPEAT});
 }

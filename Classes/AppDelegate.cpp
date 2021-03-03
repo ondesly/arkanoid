@@ -22,6 +22,8 @@
  THE SOFTWARE.
  ****************************************************************************/
 
+#include <vector>
+
 #include "Scenes/GameScene.h"
 
 #include "AppDelegate.h"
@@ -42,6 +44,14 @@ using namespace CocosDenshion;
 #endif
 
 USING_NS_CC;
+
+namespace {
+
+    const std::vector<int> cImageSizes{720, 1080, 1536, 2048};
+    const char *cTexturesPath = "textures/";
+    const char *cBgTextureFileName = "bg.plist";
+
+}
 
 static cocos2d::Size designResolutionSize = cocos2d::Size(480, 320);
 static cocos2d::Size smallResolutionSize = cocos2d::Size(480, 320);
@@ -80,9 +90,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto glview = director->getOpenGLView();
     if (!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-        glview = GLViewImpl::createWithRect("FruitMatch2", cocos2d::Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
+        glview = GLViewImpl::createWithRect("Arkanoid", cocos2d::Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
 #else
-        glview = GLViewImpl::create("FruitMatch2");
+        glview = GLViewImpl::create("Arkanoid");
 #endif
         director->setOpenGLView(glview);
     }
@@ -91,6 +101,18 @@ bool AppDelegate::applicationDidFinishLaunching() {
     glview->setDesignResolutionSize(frameSize.width, frameSize.height, ResolutionPolicy::SHOW_ALL);
 
     register_all_packages();
+
+    // Set search path by screen size
+
+    const auto screenSize = int(std::min(frameSize.width, frameSize.height));
+    const auto closestSize = *std::min_element(cImageSizes.begin(), cImageSizes.end(), [screenSize](int a, int b) {
+        return std::abs(a - screenSize) < std::abs(b - screenSize);
+    });
+    cocos2d::FileUtils::getInstance()->setSearchPaths({cTexturesPath + std::to_string(closestSize)});
+
+    // Load textures
+
+    cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile(cBgTextureFileName);
 
     // create a scene. it's an autorelease object
     auto scene = ar::GameScene::create();

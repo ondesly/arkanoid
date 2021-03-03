@@ -50,6 +50,8 @@ namespace ar {
 
     private:
 
+        void addBackground();
+
         void enableTouch();
 
         bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unusedEvent);

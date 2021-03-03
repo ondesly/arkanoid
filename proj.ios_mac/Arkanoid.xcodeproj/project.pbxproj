@@ -18,6 +18,7 @@
 		294D0D641D0D56D500F7F5D4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 294D0D631D0D56D500F7F5D4 /* CoreText.framework */; };
 		46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8419C43A87006E1F66 /* AppDelegate.cpp */; };
 		52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B47A461A53D09B004E4C60 /* Security.framework */; };
+		901A3AF025EFE9BF00E119F1 /* textures in Resources */ = {isa = PBXBuildFile; fileRef = 901A3AEF25EFE9BF00E119F1 /* textures */; };
 		9021F5B125EE4517009A24ED /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9021F5B025EE4517009A24ED /* OpenGLES.framework */; };
 		9021F5B325EE4520009A24ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9021F5B225EE4520009A24ED /* UIKit.framework */; };
 		9021F5D225EE50DA009A24ED /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9021F5D025EE50BA009A24ED /* libz.tbd */; };
@@ -85,6 +86,7 @@
 		46880B8419C43A87006E1F66 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		46880B8519C43A87006E1F66 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		52B47A461A53D09B004E4C60 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		901A3AEF25EFE9BF00E119F1 /* textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = textures; sourceTree = "<group>"; };
 		9021F5B025EE4517009A24ED /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
 		9021F5B225EE4520009A24ED /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		9021F5D025EE50BA009A24ED /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
@@ -172,6 +174,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				901A3AE125EFE9B300E119F1 /* Resources */,
 				46880B8319C43A87006E1F66 /* Classes */,
 				1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -211,6 +214,15 @@
 			);
 			name = Classes;
 			path = ../Classes;
+			sourceTree = "<group>";
+		};
+		901A3AE125EFE9B300E119F1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				901A3AEF25EFE9BF00E119F1 /* textures */,
+			);
+			name = Resources;
+			path = ../Resources;
 			sourceTree = "<group>";
 		};
 		B1399020A8CFFB3AAA1F3609 /* Scenes */ = {
@@ -334,6 +346,7 @@
 			files = (
 				907053A42273805100ADB1F3 /* logo@2x.png in Resources */,
 				1A88B2641FC3D9C9005C14AE /* Images.xcassets in Resources */,
+				901A3AF025EFE9BF00E119F1 /* textures in Resources */,
 				907053A22273805100ADB1F3 /* logo.png in Resources */,
 				907053A32273805100ADB1F3 /* logo@3x.png in Resources */,
 				1AF87B881F6F781D007BE51C /* LaunchScreen.storyboard in Resources */,
