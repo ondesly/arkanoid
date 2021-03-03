@@ -81,17 +81,12 @@ bool ar::GameScene::init() {
 
     mBall = CircleBody::create();
     mBall->setTextureRect(cocos2d::Rect(cocos2d::Vec2::ZERO, {10.F, 10.F}));
-    mBall->setPosition({getContentSize().width / 2 - 200.F, getContentSize().height / 4 * 3});
+    mBall->setPosition({mPlatform->getPosition().x, mPlatform->getPosition().y + mPlatform->getContentSize().height / 2 + mBall->getContentSize().height / 2});
     addChild(mBall);
-
-    mPhysics->registerAgent(mBall);
 
     mBall->setSpeed(0.5F);
 
-    std::default_random_engine gen{std::random_device{}()};
-    std::uniform_real_distribution<float> distrib{-1.F, 1.F};
-
-    mBall->setVelocity({distrib(gen), distrib(gen)});
+    mPhysics->registerAgent(mBall);
 
     //
 
@@ -105,6 +100,11 @@ bool ar::GameScene::init() {
 bool ar::GameScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unusedEvent) {
     const auto location = touch->getLocation();
     mPlatform->setTargetX(location.x);
+
+    if (mBall->getVelocity().equals({})) {
+        const cocos2d::Vec2 vel{location.x < mPlatform->getPosition().x ? -1.F : 1.F, 1.F};
+        mBall->setVelocity(vel.getNormalized());
+    }
 
     return true;
 }
