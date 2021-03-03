@@ -48,16 +48,12 @@ void ar::Physics::checkCollisions() {
             }
 
             if (agent->isCollided(obstacle)) {
-                auto result = agent->getCollisionVelocity(obstacle);
+                const auto velocity = agent->getVelocityAfterCollision(obstacle);
 
-                const auto &velocity = agent->getVelocity();
                 const auto &ob_velocity = obstacle->getVelocity();
                 const auto ob_friction = obstacle->getFriction();
 
-                const cocos2d::Vec2 new_velocity{
-                        velocity.x + result.x + ob_velocity.x * ob_friction,
-                        velocity.y + result.y + ob_velocity.y * ob_friction};
-
+                const auto new_velocity = velocity + ob_velocity * ob_friction;
                 agent->setVelocity(new_velocity.getNormalized());
             }
         }

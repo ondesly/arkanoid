@@ -54,7 +54,7 @@ bool ar::RectangleBody::isCollided(ar::Body *obstacle) const {
     return false;
 }
 
-cocos2d::Vec2 ar::RectangleBody::getCollisionVelocity(ar::Body *obstacle) const {
+cocos2d::Vec2 ar::RectangleBody::getVelocityAfterCollision(ar::Body *obstacle) const {
     return {};
 }
 
@@ -81,43 +81,31 @@ bool ar::CircleBody::isCollided(ar::Body *obstacle) const {
     return distance <= getContentSize().width / 2;
 }
 
-cocos2d::Vec2 ar::CircleBody::getCollisionVelocity(ar::Body *obstacle) const {
+cocos2d::Vec2 ar::CircleBody::getVelocityAfterCollision(ar::Body *obstacle) const {
     const auto &pos = getPosition();
     const auto &velocity = getVelocity();
-    const auto obstaclePos = obstacle->getPosition() - obstacle->getContentSize() / 2;
     const auto &obstacleSize = obstacle->getContentSize();
+    const auto obstaclePos = obstacle->getPosition() - obstacleSize / 2;
 
-    cocos2d::Vec2 nearest = pos;
-    cocos2d::Vec2 result;
+    auto result = velocity;
 
     // Horizontal
 
     if (pos.x < obstaclePos.x) {
-        nearest.x = obstaclePos.x;
-        result.x = -velocity.x * 2;
+        result.x = -std::abs(result.x);
     } else if (pos.x > obstaclePos.x + obstacleSize.width) {
-        nearest.x = obstaclePos.x + obstacleSize.width;
-        result.x = -velocity.x * 2;
+        result.x = std::abs(result.x);
     }
 
     // Vertical
 
     if (pos.y < obstaclePos.y) {
-        nearest.y = obstaclePos.y;
-        result.y = -velocity.y * 2;
+        result.y = -std::abs(result.y);
     } else if (pos.y > obstaclePos.y + obstacleSize.height) {
-        nearest.y = obstaclePos.y + obstacleSize.height;
-        result.y = -velocity.y * 2;
+        result.y = std::abs(result.y);
     }
 
-    // Distance
+    //
 
-    const cocos2d::Vec2 diff = pos - nearest;
-    const float distance = std::sqrt(diff.x * diff.x + diff.y * diff.y);
-
-    if (distance <= getContentSize().width / 2) {
-        return result;
-    } else {
-        return {};
-    }
+    return result;
 }
