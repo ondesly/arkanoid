@@ -71,6 +71,9 @@ bool ar::GameScene::init() {
     mPlatform->setPosition(getContentSize() / 2);
     addChild(mPlatform);
 
+    mPlatform->setSpeed(0.4F);
+    mPlatform->setFriction(0.5F);
+
     mPhysics->registerAgent(mPlatform);
     mPhysics->registerObstacle(mPlatform);
 

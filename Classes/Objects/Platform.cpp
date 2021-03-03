@@ -8,17 +8,6 @@
 
 #include "Platform.h"
 
-namespace {
-
-    const float cSpeed = 0.4F;
-    const float cFriction = 0.5F;
-
-    constexpr float get_sign(float value) {
-        return (0.F < value) - (value < 0.F);
-    }
-
-}
-
 ar::Platform *ar::Platform::create() {
     auto platform = new(std::nothrow) Platform();
     if (platform && platform->init()) {
@@ -34,9 +23,6 @@ bool ar::Platform::init() {
         return false;
     }
 
-    mSpeed = cSpeed;
-    mFriction = cFriction;
-
     scheduleUpdate();
 
     return true;
@@ -48,12 +34,12 @@ void ar::Platform::update(float delta) {
     if ((getPosition().x == mTargetX) ||
             (getVelocity().x > 0.F && getPosition().x > mTargetX) ||
             (getVelocity().x < 0.F && getPosition().x < mTargetX)) {
-        setVelocity(cocos2d::Vec2::ZERO);
+        setVelocity({});
     }
 }
 
 void ar::Platform::setTargetX(float x) {
     mTargetX = x;
 
-    setVelocity({get_sign(mTargetX - getPosition().x), 0.F});
+    setVelocity({mTargetX > getPosition().x ? 1.F : -1.F, 0.F});
 }
