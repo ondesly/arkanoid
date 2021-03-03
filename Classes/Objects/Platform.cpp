@@ -10,8 +10,8 @@
 
 namespace {
 
+    const float cSpeed = 5.F;
     const float cFriction = 0.5F;
-    const float cVelocity = 5.F;
 
     constexpr float get_sign(float value) {
         return (0.F < value) - (value < 0.F);
@@ -34,7 +34,8 @@ bool ar::Platform::init() {
         return false;
     }
 
-    setFriction(cFriction);
+    mSpeed = cSpeed;
+    mFriction = cFriction;
 
     scheduleUpdate();
 
@@ -54,5 +55,5 @@ void ar::Platform::update(float delta) {
 void ar::Platform::setTargetX(float x) {
     mTargetX = x;
 
-    setVelocity({cVelocity * get_sign(mTargetX - getPosition().x), 0.F});
+    setVelocity({get_sign(mTargetX - getPosition().x), 0.F});
 }

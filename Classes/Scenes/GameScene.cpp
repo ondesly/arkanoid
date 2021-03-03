@@ -72,13 +72,15 @@ bool ar::GameScene::init() {
 
     mBall = CircleBody::create();
     mBall->setTextureRect(cocos2d::Rect(cocos2d::Vec2::ZERO, {10.F, 10.F}));
-    mBall->setPosition({getContentSize().width / 2, getContentSize().height / 4 * 3});
+    mBall->setPosition({getContentSize().width / 2 - 200.F, getContentSize().height / 4 * 3});
     addChild(mBall);
 
     mPhysics->registerAgent(mBall);
 
+    mBall->setSpeed(5.F);
+
     std::default_random_engine gen{std::random_device{}()};
-    std::uniform_int_distribution<float> distrib{-5.F, 5.F};
+    std::uniform_real_distribution<float> distrib{-1.F, 1.F};
 
     mBall->setVelocity({distrib(gen), distrib(gen)});
 

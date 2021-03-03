@@ -19,6 +19,10 @@ namespace ar {
 
         virtual cocos2d::Vec2 getCollisionResult(Body *obstacle) const = 0;
 
+        float getSpeed() const;
+
+        void setSpeed(float speed);
+
         const cocos2d::Vec2 &getVelocity() const;
 
         void setVelocity(const cocos2d::Vec2 &velocity);
@@ -27,8 +31,9 @@ namespace ar {
 
         void setFriction(float value);
 
-    private:
+    protected:
 
+        float mSpeed = 0.F;
         cocos2d::Vec2 mVelocity;
         float mFriction = 0.F;
 

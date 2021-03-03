@@ -32,7 +32,9 @@ void ar::Physics::updateAgents() {
     for (const auto &agent : mAgents) {
         const auto &pos = agent->getPosition();
         const auto &velocity = agent->getVelocity();
-        agent->setPosition(pos + velocity);
+        const auto speed = agent->getSpeed();
+
+        agent->setPosition(pos + velocity * speed);
     }
 }
 

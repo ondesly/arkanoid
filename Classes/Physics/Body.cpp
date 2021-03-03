@@ -16,6 +16,14 @@ bool ar::Body::init() {
     return true;
 }
 
+float ar::Body::getSpeed() const {
+    return mSpeed;
+}
+
+void ar::Body::setSpeed(float speed) {
+    mSpeed = speed;
+}
+
 const cocos2d::Vec2 &ar::Body::getVelocity() const {
     return mVelocity;
 }
