@@ -23,7 +23,7 @@ namespace {
 }
 
 ar::Dialog *ar::Dialog::create(const cocos2d::Size &size, const std::string &title, const std::string &score,
-        const std::function<void()> &onClose) {
+        const std::function<void(Dialog *)> &onClose) {
     auto dialog = new(std::nothrow) Dialog();
     if (dialog && dialog->init(size, title, score, onClose)) {
         dialog->autorelease();
@@ -34,7 +34,7 @@ ar::Dialog *ar::Dialog::create(const cocos2d::Size &size, const std::string &tit
 }
 
 bool ar::Dialog::init(const cocos2d::Size &size, const std::string &title, const std::string &score,
-        const std::function<void()> &onClose) {
+        const std::function<void(Dialog *)> &onClose) {
     if (!cocos2d::Node::init()) {
         return false;
     }
@@ -72,7 +72,9 @@ bool ar::Dialog::init(const cocos2d::Size &size, const std::string &title, const
     button->setPosition(getContentSize() / 2);
 
     button->addTouchEventListener([&, onClose](Ref *sender, cocos2d::ui::Widget::TouchEventType type) {
-        onClose();
+        if (type == cocos2d::ui::Widget::TouchEventType::ENDED) {
+            onClose(this);
+        }
     });
 
     addChild(button);

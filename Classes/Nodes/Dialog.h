@@ -29,12 +29,12 @@ namespace ar {
     public:
 
         static Dialog *create(const cocos2d::Size &size, const std::string &title, const std::string &score,
-                const std::function<void()> &onClose);
+                const std::function<void(Dialog *)> &onClose);
 
     public:
 
         bool init(const cocos2d::Size &size, const std::string &title, const std::string &score,
-                const std::function<void()> &onClose);
+                const std::function<void(Dialog *)> &onClose);
 
     private:
 
