@@ -8,9 +8,9 @@
 
 #include "Platform.h"
 
-ar::Platform *ar::Platform::create() {
+ar::Platform *ar::Platform::createWithSpriteFrameName(const std::string &name) {
     auto platform = new(std::nothrow) Platform();
-    if (platform && platform->init()) {
+    if (platform && platform->initWithSpriteFrameName(name)) {
         platform->autorelease();
         return platform;
     }

@@ -54,6 +54,8 @@ namespace ar {
 
         void addFrame(const std::shared_ptr<Physics> &physics);
 
+        void addPlatform();
+
         void enableTouch();
 
         bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unusedEvent);

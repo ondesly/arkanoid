@@ -24,10 +24,15 @@ namespace {
 
         const char *bg = "bg";
         const char *ball = "ball";
+        const char *platform = "platform";
+        const char *platformShadow = "platform_shadow";
 
     }
 
     const size_t cPhysicsTicksPerFrame = 10;
+
+    const float cPlatformSpeed = 0.4F;
+    const float cPlatformFriction = 0.5F;
 
 }
 
@@ -74,16 +79,7 @@ bool ar::GameScene::init() {
 
     //
 
-    mPlatform = Platform::create();
-    mPlatform->setTextureRect(cocos2d::Rect(cocos2d::Vec2::ZERO, {100.F, 20.F}));
-    mPlatform->setPosition(getContentSize() / 2);
-    addChild(mPlatform);
-
-    mPlatform->setSpeed(0.4F);
-    mPlatform->setFriction(0.5F);
-
-    mPhysics->registerAgent(mPlatform);
-    mPhysics->registerObstacle(mPlatform);
+    addPlatform();
 
     //
 
@@ -148,4 +144,22 @@ void ar::GameScene::addFrame(const std::shared_ptr<Physics> &physics) {
     addChild(frame);
 
     frame->layout();
+}
+
+void ar::GameScene::addPlatform() {
+    mPlatform = Platform::createWithSpriteFrameName(spriteFrame::platform);
+    mPlatform->setPosition(getContentSize() / 2);
+    addChild(mPlatform);
+
+    auto shadow = cocos2d::Sprite::createWithSpriteFrameName(spriteFrame::platformShadow);
+    shadow->setPosition({mPlatform->getContentSize().width / 2 + mPlatform->getContentSize().height / 2, 0.F});
+    mPlatform->addChild(shadow, -1);
+
+    //
+
+    mPhysics->registerAgent(mPlatform);
+    mPhysics->registerObstacle(mPlatform);
+
+    mPlatform->setSpeed(cPlatformSpeed);
+    mPlatform->setFriction(cPlatformFriction);
 }

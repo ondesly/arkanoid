@@ -15,7 +15,7 @@ namespace ar {
     class Platform : public RectangleBody {
     public:
 
-        static Platform *create();
+        static Platform *createWithSpriteFrameName(const std::string &name);
 
     public:
 
