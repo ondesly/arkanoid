@@ -84,7 +84,10 @@ namespace ar {
 
         void addListeners();
 
-        void reset();
+        void startGame();
+
+        void endGame();
+
 
     };
 

@@ -92,14 +92,14 @@ bool ar::GameScene::init() {
 
     //
 
-    reset();
+    startGame();
 
     //
 
     return true;
 }
 
-void ar::GameScene::reset() {
+void ar::GameScene::startGame() {
     mScore = 0;
     mDestroyedBlocksCount = 0;
 
@@ -122,6 +122,19 @@ void ar::GameScene::reset() {
     //
 
     mTouchListener->setEnabled(true);
+}
+
+void ar::GameScene::endGame() {
+    mBall->setVisible(false);
+    mPlatform->setVisible(false);
+
+    //
+
+    mHeader->setScore(0);
+
+    //
+
+    mTouchListener->setEnabled(false);
 }
 
 bool ar::GameScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unusedEvent) {
