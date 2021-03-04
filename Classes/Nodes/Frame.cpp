@@ -10,25 +10,12 @@
 
 #include "Physics/RectangleBody.h"
 #include "Physics/Physics.h"
+#include "Resources.h"
 
 #include "Frame.h"
 
-namespace {
-
-    namespace spriteFrame {
-
-        const char *empty = "empty";
-        const char *tube = "tube";
-        const char *decor = "tube_decor";
-        const char *cornerLeft = "tube_corner_left";
-        const char *cornerRight = "tube_corner_right";
-
-    }
-
-}
-
 ar::Frame *ar::Frame::create(const std::shared_ptr<Physics> &physics) {
-    auto emptyFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrame::empty);
+    auto emptyFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(texture::game::empty);
 
     auto frame = new(std::nothrow) Frame(physics);
     if (frame && frame->initWithTexture(emptyFrame->getTexture())) {
@@ -54,7 +41,7 @@ void ar::Frame::layout() {
 }
 
 void ar::Frame::addHeader() {
-    auto header = cocos2d::Sprite::createWithSpriteFrameName(spriteFrame::empty);
+    auto header = cocos2d::Sprite::createWithSpriteFrameName(texture::game::empty);
     header->setColor(cocos2d::Color3B::BLACK);
     header->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_TOP);
     header->setPosition({getContentSize().width / 2, getContentSize().height});
@@ -64,21 +51,21 @@ void ar::Frame::addHeader() {
 }
 
 void ar::Frame::addTop() {
-    auto cornerFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrame::cornerLeft);
-    auto decorFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrame::decor);
+    auto cornerFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(texture::game::tubeCornerLeft);
+    auto decorFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(texture::game::tubeDecor);
 
     const auto cornerWidth = cornerFrame->getOriginalSize().width;
     const auto segmentSize = (getContentSize().width - cornerWidth * 2 - decorFrame->getOriginalSize().width * 2) / 4;
 
     // Corners
 
-    auto cornerLeft = RectangleBody::createWithSpriteFrameName(spriteFrame::cornerLeft);
+    auto cornerLeft = RectangleBody::createWithSpriteFrameName(texture::game::tubeCornerLeft);
     cornerLeft->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_LEFT);
     cornerLeft->setPosition({0.F, getContentSize().height - mHeaderSize});
     addChild(cornerLeft);
     mPhysics->registerObstacle(cornerLeft);
 
-    auto cornerRight = RectangleBody::createWithSpriteFrameName(spriteFrame::cornerRight);
+    auto cornerRight = RectangleBody::createWithSpriteFrameName(texture::game::tubeCornerRight);
     cornerRight->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_RIGHT);
     cornerRight->setPosition({getContentSize().width, getContentSize().height - mHeaderSize});
     addChild(cornerRight);
@@ -86,21 +73,21 @@ void ar::Frame::addTop() {
 
     // Tube H
 
-    auto tubeHLeft = RectangleBody::createWithSpriteFrameName(spriteFrame::tube);
+    auto tubeHLeft = RectangleBody::createWithSpriteFrameName(texture::game::tube);
     tubeHLeft->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_LEFT);
     tubeHLeft->setPosition({cornerWidth, getContentSize().height - mHeaderSize});
     tubeHLeft->setScaleX(segmentSize / tubeHLeft->getContentSize().width);
     addChild(tubeHLeft);
     mPhysics->registerObstacle(tubeHLeft);
 
-    auto tubeHCenter = RectangleBody::createWithSpriteFrameName(spriteFrame::tube);
+    auto tubeHCenter = RectangleBody::createWithSpriteFrameName(texture::game::tube);
     tubeHCenter->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_TOP);
     tubeHCenter->setPosition({getContentSize().width / 2, getContentSize().height - mHeaderSize});
     tubeHCenter->setScaleX(segmentSize * 2 / tubeHCenter->getContentSize().width);
     addChild(tubeHCenter);
     mPhysics->registerObstacle(tubeHCenter);
 
-    auto tubeHRight = RectangleBody::createWithSpriteFrameName(spriteFrame::tube);
+    auto tubeHRight = RectangleBody::createWithSpriteFrameName(texture::game::tube);
     tubeHRight->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_RIGHT);
     tubeHRight->setPosition({getContentSize().width - cornerWidth, getContentSize().height - mHeaderSize});
     tubeHRight->setScaleX(segmentSize / tubeHRight->getContentSize().width);
@@ -109,13 +96,13 @@ void ar::Frame::addTop() {
 
     // Decor
 
-    auto decorLeft = RectangleBody::createWithSpriteFrameName(spriteFrame::decor);
+    auto decorLeft = RectangleBody::createWithSpriteFrameName(texture::game::tubeDecor);
     decorLeft->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_LEFT);
     decorLeft->setPosition({cornerWidth + segmentSize, getContentSize().height - mHeaderSize});
     addChild(decorLeft);
     mPhysics->registerObstacle(decorLeft);
 
-    auto decorRight = RectangleBody::createWithSpriteFrameName(spriteFrame::decor);
+    auto decorRight = RectangleBody::createWithSpriteFrameName(texture::game::tubeDecor);
     decorRight->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_RIGHT);
     decorRight->setPosition({getContentSize().width - segmentSize - cornerWidth, getContentSize().height - mHeaderSize});
     addChild(decorRight);
@@ -123,8 +110,8 @@ void ar::Frame::addTop() {
 }
 
 void ar::Frame::addSides() {
-    auto cornerFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrame::cornerLeft);
-    auto decorFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrame::decor);
+    auto cornerFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(texture::game::tubeCornerLeft);
+    auto decorFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(texture::game::tubeDecor);
 
     const auto top = getContentSize().height - mHeaderSize - cornerFrame->getOriginalSize().height;
     const auto segmentSize = decorFrame->getOriginalSize().width;
@@ -135,12 +122,12 @@ void ar::Frame::addSides() {
         RectangleBody *right;
 
         if (i % 2 == 0) {
-            left = RectangleBody::createWithSpriteFrameName(spriteFrame::decor);
-            right = RectangleBody::createWithSpriteFrameName(spriteFrame::decor);
+            left = RectangleBody::createWithSpriteFrameName(texture::game::tubeDecor);
+            right = RectangleBody::createWithSpriteFrameName(texture::game::tubeDecor);
         } else {
-            left = RectangleBody::createWithSpriteFrameName(spriteFrame::tube);
+            left = RectangleBody::createWithSpriteFrameName(texture::game::tube);
             left->setScaleX(segmentSize / left->getContentSize().width);
-            right = RectangleBody::createWithSpriteFrameName(spriteFrame::tube);
+            right = RectangleBody::createWithSpriteFrameName(texture::game::tube);
             right->setScaleX(segmentSize / right->getContentSize().width);
         }
 

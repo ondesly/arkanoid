@@ -15,21 +15,11 @@
 #include "Objects/Platform.h"
 #include "Physics/CircleBody.h"
 #include "Physics/Physics.h"
+#include "Resources.h"
 
 #include "GameScene.h"
 
 namespace {
-
-    namespace spriteFrame {
-
-        const char *bg = "bg";
-        const char *ball = "ball";
-        const char *platform = "platform";
-        const char *platformShadow = "platform_shadow";
-        const char *empty = "empty";
-        const char *tube = "tube";
-
-    }
 
     const size_t cPhysicsTicksPerFrame = 10;
 
@@ -67,7 +57,7 @@ bool ar::GameScene::init() {
 
     const auto headerSize = getContentSize().width / 10.F;
     const auto tubeSize = cocos2d::SpriteFrameCache::getInstance()->
-            getSpriteFrameByName(spriteFrame::tube)->getOriginalSize().height;
+            getSpriteFrameByName(texture::game::tube)->getOriginalSize().height;
 
     addFrameShadow({tubeSize, tubeSize + headerSize});
 
@@ -139,7 +129,7 @@ void ar::GameScene::enableTouch() {
 }
 
 void ar::GameScene::addBackground() {
-    auto bg = cocos2d::Sprite::createWithSpriteFrameName(spriteFrame::bg);
+    auto bg = cocos2d::Sprite::createWithSpriteFrameName(texture::bg::bg);
     bg->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
     bg->setTextureRect(cocos2d::Rect({}, getContentSize()));
     addChild(bg);
@@ -157,7 +147,7 @@ void ar::GameScene::addFrame(const std::shared_ptr<Physics> &physics, float head
 }
 
 void ar::GameScene::addFrameShadow(const cocos2d::Vec2 &offset) {
-    auto leftShadow = cocos2d::Sprite::createWithSpriteFrameName(spriteFrame::empty);
+    auto leftShadow = cocos2d::Sprite::createWithSpriteFrameName(texture::game::empty);
     leftShadow->setColor(cocos2d::Color3B::BLACK);
     leftShadow->setOpacity(cShadowOpacity);
     leftShadow->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
@@ -166,7 +156,7 @@ void ar::GameScene::addFrameShadow(const cocos2d::Vec2 &offset) {
             (getContentSize().height - offset.y) / leftShadow->getContentSize().height);
     addChild(leftShadow);
 
-    auto topShadow = cocos2d::Sprite::createWithSpriteFrameName(spriteFrame::empty);
+    auto topShadow = cocos2d::Sprite::createWithSpriteFrameName(texture::game::empty);
     topShadow->setColor(cocos2d::Color3B::BLACK);
     topShadow->setOpacity(cShadowOpacity);
     topShadow->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_LEFT);
@@ -177,9 +167,9 @@ void ar::GameScene::addFrameShadow(const cocos2d::Vec2 &offset) {
 }
 
 ar::Platform *ar::GameScene::makePlatform() {
-    auto platform = Platform::createWithSpriteFrameName(spriteFrame::platform);
+    auto platform = Platform::createWithSpriteFrameName(texture::game::platform);
 
-    auto shadow = cocos2d::Sprite::createWithSpriteFrameName(spriteFrame::platformShadow);
+    auto shadow = cocos2d::Sprite::createWithSpriteFrameName(texture::game::platformShadow);
     shadow->setPosition({platform->getContentSize().width / 2 + platform->getContentSize().height / 2, 0.F});
     platform->addChild(shadow, -1);
 
@@ -195,7 +185,7 @@ ar::Platform *ar::GameScene::makePlatform() {
 }
 
 ar::Body *ar::GameScene::makeBall() {
-    auto ball = CircleBody::createWithSpriteFrameName(spriteFrame::ball);
+    auto ball = CircleBody::createWithSpriteFrameName(texture::game::ball);
 
     mPhysics->registerAgent(ball);
 
