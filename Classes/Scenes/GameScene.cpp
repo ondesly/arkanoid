@@ -59,16 +59,16 @@ bool ar::GameScene::init() {
 
     //
 
-    const auto headerSize = getContentSize().width / 10.F;
-    const auto tubeSize = cocos2d::SpriteFrameCache::getInstance()->
+    mHeaderSize = getContentSize().width / 10.F;
+    mFrameSize = cocos2d::SpriteFrameCache::getInstance()->
             getSpriteFrameByName(texture::game::tube)->getOriginalSize().height;
-    const auto blockSize = (getContentSize().width - tubeSize * 2) / cBlocksHCount;
+    const auto blockSize = (getContentSize().width - mFrameSize * 2) / cBlocksHCount;
 
-    addFrameShadow(blockSize / 2, {tubeSize, tubeSize + headerSize});
+    addFrameShadow(blockSize / 2, {mFrameSize, mFrameSize + mHeaderSize});
 
     //
 
-    mBlocks = makeBlocks(mPhysics, blockSize, {tubeSize, headerSize + tubeSize * 4});
+    mBlocks = makeBlocks(mPhysics, blockSize, {mFrameSize, mHeaderSize + mFrameSize * 4});
     addChild(mBlocks);
 
     mPlatform = makePlatform();
@@ -83,8 +83,8 @@ bool ar::GameScene::init() {
 
     //
 
-    addFrame(mPhysics, headerSize);
-    addHeader(headerSize);
+    addFrame(mPhysics, mHeaderSize);
+    addHeader(mHeaderSize);
 
     //
 

@@ -53,6 +53,9 @@ namespace ar {
 
         size_t mDestroyedBlocksCount = 0;
 
+        float mHeaderSize = 0;
+        float mFrameSize = 0;
+
     private:
 
         void addBackground();
