@@ -21,13 +21,11 @@
 
 namespace {
 
-    const size_t cPhysicsTicksPerFrame = 10;
-
-    const float cBallSpeed = 0.5F;
+    const float cBallSpeed = 0.2F;
     const float cBallAcceleration = 1.1F;
     const size_t cDestroyedBlockCountToAccelerate = 5;
 
-    const float cPlatformSpeed = 0.4F;
+    const float cPlatformSpeed = 0.2F;
     const float cPlatformFriction = 0.5F;
 
     const size_t cBlocksHCount = 15;
@@ -55,7 +53,11 @@ bool ar::GameScene::init() {
 
     //
 
-    mPhysics = std::make_shared<Physics>(cPhysicsTicksPerFrame);
+    const auto ballWidth = cocos2d::SpriteFrameCache::getInstance()->
+            getSpriteFrameByName(texture::game::ball)->getOriginalSize().width;
+
+    const auto physicsTicksPerFrame = size_t(ballWidth);
+    mPhysics = std::make_shared<Physics>(physicsTicksPerFrame);
 
     //
 
