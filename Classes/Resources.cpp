@@ -48,6 +48,7 @@ namespace ar {
     namespace event {
 
         const char *onBlockDestroyed = "onBlockDestroyed";
+        const char *onBallOut = "onBallOut";
 
     }
 

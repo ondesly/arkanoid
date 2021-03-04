@@ -17,6 +17,10 @@ namespace ar {
 
         static Ball *create(const std::string &name);
 
+    public:
+
+        void setPosition(const cocos2d::Vec2 &pos) override;
+
     };
 
 }

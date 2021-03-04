@@ -48,6 +48,7 @@ namespace ar {
     namespace event {
 
         extern const char *onBlockDestroyed;
+        extern const char *onBallOut;
 
     }
 
