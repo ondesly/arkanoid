@@ -26,7 +26,7 @@ namespace {
 
     const int cShadowOpacity = 100;
 
-    const size_t cBlocksHCount = 10;
+    const size_t cBlocksHCount = 15;
     const size_t cBlocksVCount = 5;
 
 }
@@ -64,7 +64,7 @@ bool ar::GameScene::init() {
 
     //
 
-    mBlocks = makeBlocks(mPhysics, {tubeSize, headerSize + tubeSize * 2});
+    mBlocks = makeBlocks(mPhysics, {tubeSize, headerSize + tubeSize * 4});
     addChild(mBlocks);
 
     mPlatform = makePlatform();
