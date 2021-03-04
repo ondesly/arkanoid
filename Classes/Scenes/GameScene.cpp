@@ -24,8 +24,6 @@ namespace {
     const float cPlatformSpeed = 0.4F;
     const float cPlatformFriction = 0.5F;
 
-    const int cShadowOpacity = 100;
-
     const size_t cBlocksHCount = 15;
     const size_t cBlocksVCount = 5;
 

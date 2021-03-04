@@ -36,4 +36,6 @@ namespace ar {
 
     }
 
+    extern const uint8_t cShadowOpacity;
+
 }
