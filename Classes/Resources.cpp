@@ -42,6 +42,18 @@ namespace ar {
 
     }
 
+    namespace event {
+
+        const char *onBlockDestroyed = "onBlockDestroyed";
+
+    }
+
+    namespace score {
+
+        const size_t blockValue = 10;
+
+    }
+
     const uint8_t cShadowOpacity = 100;
 
 }

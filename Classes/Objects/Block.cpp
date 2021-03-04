@@ -6,6 +6,8 @@
 //  Copyright © 2021 Dmitrii Torkhov. All rights reserved.
 //
 
+#include <base/CCEventDispatcher.h>
+
 #include "Resources.h"
 
 #include "Block.h"
@@ -63,6 +65,10 @@ void ar::Block::setType(int type) {
 
 void ar::Block::onCollision() {
     setType(--mType);
+
+    if (mType < 0) {
+        getEventDispatcher()->dispatchCustomEvent(event::onBlockDestroyed);
+    }
 }
 
 const cocos2d::Color3B &ar::Block::getColor(int type) const {

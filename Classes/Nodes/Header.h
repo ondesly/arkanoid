@@ -12,6 +12,8 @@
 
 namespace cocos2d {
 
+    class EventListenerCustom;
+
     class Label;
 
 }
@@ -29,7 +31,11 @@ namespace ar {
 
     private:
 
+        size_t mScore = 0;
+
         cocos2d::Label *mScoreValue;
+
+        cocos2d::EventListenerCustom *mOnBlockDestroyed;
 
     };
 

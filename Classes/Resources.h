@@ -42,6 +42,18 @@ namespace ar {
 
     }
 
+    namespace event {
+
+        extern const char *onBlockDestroyed;
+
+    }
+
+    namespace score {
+
+        extern const size_t blockValue;
+
+    }
+
     extern const uint8_t cShadowOpacity;
 
 }
