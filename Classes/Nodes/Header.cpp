@@ -65,11 +65,11 @@ bool ar::Header::init(const cocos2d::Size &size) {
 
     //
 
-    mOnBlockDestroyed = cocos2d::EventListenerCustom::create(event::onBlockDestroyed, [&](cocos2d::EventCustom *event) {
+    auto onBlockDestroyed = cocos2d::EventListenerCustom::create(event::onBlockDestroyed, [&](cocos2d::EventCustom *event) {
         mScore += score::blockValue;
         mScoreValue->setString(std::to_string(mScore));
     });
-    getEventDispatcher()->addEventListenerWithSceneGraphPriority(mOnBlockDestroyed, this);
+    getEventDispatcher()->addEventListenerWithSceneGraphPriority(onBlockDestroyed, this);
 
     //
 
