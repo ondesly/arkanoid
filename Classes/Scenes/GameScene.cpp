@@ -26,6 +26,8 @@ namespace {
         const char *ball = "ball";
         const char *platform = "platform";
         const char *platformShadow = "platform_shadow";
+        const char *empty = "empty";
+        const char *tube = "tube";
 
     }
 
@@ -33,6 +35,8 @@ namespace {
 
     const float cPlatformSpeed = 0.4F;
     const float cPlatformFriction = 0.5F;
+
+    const int cShadowOpacity = 100;
 
 }
 
@@ -58,6 +62,14 @@ bool ar::GameScene::init() {
     //
 
     addBackground();
+
+    //
+
+    const auto headerSize = getContentSize().width / 10.F;
+    const auto tubeSize = cocos2d::SpriteFrameCache::getInstance()->
+            getSpriteFrameByName(spriteFrame::tube)->getOriginalSize().height;
+
+    addFrameShadow({tubeSize, tubeSize + headerSize});
 
     //
 
@@ -91,7 +103,7 @@ bool ar::GameScene::init() {
 
     //
 
-    addFrame(mPhysics);
+    addFrame(mPhysics, headerSize);
 
     //
 
@@ -135,13 +147,33 @@ void ar::GameScene::addBackground() {
     bg->getTexture()->setTexParameters({GL_NEAREST, GL_NEAREST, GL_REPEAT, GL_REPEAT});
 }
 
-void ar::GameScene::addFrame(const std::shared_ptr<Physics> &physics) {
+void ar::GameScene::addFrame(const std::shared_ptr<Physics> &physics, float headerSize) {
     auto frame = Frame::create(physics);
-    frame->setHeaderSize(getContentSize().width / 10.F);
+    frame->setHeaderSize(headerSize);
     frame->setContentSize(getContentSize());
     addChild(frame);
 
     frame->layout();
+}
+
+void ar::GameScene::addFrameShadow(const cocos2d::Vec2 &offset) {
+    auto leftShadow = cocos2d::Sprite::createWithSpriteFrameName(spriteFrame::empty);
+    leftShadow->setColor(cocos2d::Color3B::BLACK);
+    leftShadow->setOpacity(cShadowOpacity);
+    leftShadow->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
+    leftShadow->setPosition({offset.x, 0.F});
+    leftShadow->setScale(offset.x / leftShadow->getContentSize().width,
+            (getContentSize().height - offset.y) / leftShadow->getContentSize().height);
+    addChild(leftShadow);
+
+    auto topShadow = cocos2d::Sprite::createWithSpriteFrameName(spriteFrame::empty);
+    topShadow->setColor(cocos2d::Color3B::BLACK);
+    topShadow->setOpacity(cShadowOpacity);
+    topShadow->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_LEFT);
+    topShadow->setPosition({offset.x * 2, getContentSize().height - offset.y});
+    topShadow->setScale((getContentSize().width - offset.x) / leftShadow->getContentSize().width,
+            offset.x / leftShadow->getContentSize().height);
+    addChild(topShadow);
 }
 
 ar::Platform *ar::GameScene::makePlatform() {

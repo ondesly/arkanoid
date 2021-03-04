@@ -54,7 +54,9 @@ namespace ar {
 
         void addBackground();
 
-        void addFrame(const std::shared_ptr<Physics> &physics);
+        void addFrame(const std::shared_ptr<Physics> &physics, float headerSize);
+
+        void addFrameShadow(const cocos2d::Vec2 &offset);
 
         Platform *makePlatform();
 
