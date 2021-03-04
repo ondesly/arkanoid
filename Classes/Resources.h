@@ -32,6 +32,9 @@ namespace ar {
             extern const char *tubeCornerLeft;
             extern const char *tubeCornerRight;
 
+            extern const char *button;
+            extern const char *buttonDown;
+
         }
 
     }
@@ -57,6 +60,7 @@ namespace ar {
     namespace opacity {
 
         extern const uint8_t shadow;
+        extern const uint8_t dialogBack;
 
     }
 

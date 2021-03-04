@@ -33,6 +33,7 @@
 		B1399659E03ADEF2B5394E3B /* Resources.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B139931DB8E23657B2B6C372 /* Resources.cpp */; };
 		B13996BFB0CCB51671411E98 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B13997DADB4140C488A7EF5A /* GameScene.cpp */; };
 		B13997683C16F7A48296CB69 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B13999B7A117835E7BA572C8 /* Platform.cpp */; };
+		B13998FA31143C9DEE325215 /* Dialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1399F3E6373DA0E164C6973 /* Dialog.cpp */; };
 		B13999767F85E742B7A6C568 /* Header.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B139908BA722581CD7827612 /* Header.cpp */; };
 		B1399A382124072AD2AF2750 /* RectangleBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B13991BEA27F1E3426BDE4CD /* RectangleBody.cpp */; };
 		B1399A8F0ECE357743FAAF96 /* Frame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1399200B34625FD1C4824F6 /* Frame.cpp */; };
@@ -103,6 +104,7 @@
 		9070539F2273805100ADB1F3 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		907053A02273805100ADB1F3 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
 		907053A12273805100ADB1F3 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
+		B139905066E5C20608DE546F /* Dialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dialog.h; sourceTree = "<group>"; };
 		B139908BA722581CD7827612 /* Header.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Header.cpp; sourceTree = "<group>"; };
 		B13991BEA27F1E3426BDE4CD /* RectangleBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectangleBody.cpp; sourceTree = "<group>"; };
 		B1399200B34625FD1C4824F6 /* Frame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Frame.cpp; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 		B1399DD6F56E981E9060EB7F /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
 		B1399E682301A494F7710CEB /* RectangleBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectangleBody.h; sourceTree = "<group>"; };
 		B1399F2F86FBFD67DA0EADBF /* Body.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Body.cpp; sourceTree = "<group>"; };
+		B1399F3E6373DA0E164C6973 /* Dialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dialog.cpp; sourceTree = "<group>"; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -271,6 +274,8 @@
 				B139944D035E1F1165AC3D5A /* Blocks.h */,
 				B139908BA722581CD7827612 /* Header.cpp */,
 				B13999552460526FF5994FF3 /* Header.h */,
+				B1399F3E6373DA0E164C6973 /* Dialog.cpp */,
+				B139905066E5C20608DE546F /* Dialog.h */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -421,6 +426,7 @@
 				B1399659E03ADEF2B5394E3B /* Resources.cpp in Sources */,
 				B1399649DAC8AE985732C6D5 /* Blocks.cpp in Sources */,
 				B13999767F85E742B7A6C568 /* Header.cpp in Sources */,
+				B13998FA31143C9DEE325215 /* Dialog.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

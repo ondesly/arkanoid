@@ -32,6 +32,9 @@ namespace ar {
             const char *tubeCornerLeft = "tube_corner_left";
             const char *tubeCornerRight = "tube_corner_right";
 
+            const char *button = "button";
+            const char *buttonDown = "button_down";
+
         }
 
     }
@@ -57,6 +60,7 @@ namespace ar {
     namespace opacity {
 
         const uint8_t shadow = 100;
+        const uint8_t dialogBack = 180;
 
     }
 
