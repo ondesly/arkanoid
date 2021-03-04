@@ -61,6 +61,8 @@ namespace ar {
 
         void addFrameShadow(float size, const cocos2d::Vec2 &offset);
 
+        void addHeader(float headerSize);
+
         Blocks *makeBlocks(const std::shared_ptr<Physics> &physics, float blockSize, const cocos2d::Vec2 &offset);
 
         Platform *makePlatform();

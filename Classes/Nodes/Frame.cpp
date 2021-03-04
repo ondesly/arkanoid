@@ -35,19 +35,8 @@ void ar::Frame::setHeaderSize(float size) {
 }
 
 void ar::Frame::layout() {
-    addHeader();
     addTop();
     addSides();
-}
-
-void ar::Frame::addHeader() {
-    auto header = cocos2d::Sprite::createWithSpriteFrameName(texture::game::empty);
-    header->setColor(cocos2d::Color3B::BLACK);
-    header->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_TOP);
-    header->setPosition({getContentSize().width / 2, getContentSize().height});
-    header->setScale(getContentSize().width / header->getContentSize().width,
-            mHeaderSize / header->getContentSize().height);
-    addChild(header);
 }
 
 void ar::Frame::addTop() {

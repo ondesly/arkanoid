@@ -36,6 +36,12 @@ namespace ar {
 
     }
 
+    namespace font {
+
+        extern const char *arcadeClassic;
+
+    }
+
     extern const uint8_t cShadowOpacity;
 
 }

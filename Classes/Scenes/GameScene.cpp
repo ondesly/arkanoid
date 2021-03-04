@@ -10,6 +10,7 @@
 
 #include "Nodes/Blocks.h"
 #include "Nodes/Frame.h"
+#include "Nodes/Header.h"
 #include "Objects/Platform.h"
 #include "Physics/CircleBody.h"
 #include "Physics/Physics.h"
@@ -79,6 +80,7 @@ bool ar::GameScene::init() {
     //
 
     addFrame(mPhysics, headerSize);
+    addHeader(headerSize);
 
     //
 
@@ -149,6 +151,13 @@ void ar::GameScene::addFrameShadow(float size, const cocos2d::Vec2 &offset) {
     topShadow->setScale((getContentSize().width - offset.x - size) / leftShadow->getContentSize().width,
             size / leftShadow->getContentSize().height);
     addChild(topShadow);
+}
+
+void ar::GameScene::addHeader(float headerSize) {
+    auto header = Header::create({getContentSize().width, headerSize});
+    header->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_LEFT);
+    header->setPosition({0.F, getContentSize().height});
+    addChild(header);
 }
 
 ar::Blocks *ar::GameScene::makeBlocks(const std::shared_ptr<Physics> &physics, float blockSize, const cocos2d::Vec2 &offset) {
