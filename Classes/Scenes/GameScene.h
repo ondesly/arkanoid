@@ -51,7 +51,7 @@ namespace ar {
         Body *mBall;
         Platform *mPlatform;
 
-        float mBallSpeed = 0.5F;
+        size_t mDestroyedBlocksCount = 0;
 
     private:
 

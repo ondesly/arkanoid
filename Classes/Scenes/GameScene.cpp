@@ -22,6 +22,8 @@ namespace {
 
     const size_t cPhysicsTicksPerFrame = 10;
 
+    const float cBallSpeed = 0.5F;
+
     const float cPlatformSpeed = 0.4F;
     const float cPlatformFriction = 0.5F;
 
@@ -195,7 +197,20 @@ ar::Body *ar::GameScene::makeBall() {
 
     mPhysics->registerAgent(ball);
 
-    ball->setSpeed(mBallSpeed);
+    ball->setSpeed(cBallSpeed);
+
+    //
+
+    auto onBlockDestroyed = cocos2d::EventListenerCustom::create(event::onBlockDestroyed, [&, ball](cocos2d::EventCustom *event) {
+        ++mDestroyedBlocksCount;
+
+        if (mDestroyedBlocksCount % 5 == 0) {
+            ball->setSpeed(ball->getSpeed() * 1.1F);
+        }
+    });
+    getEventDispatcher()->addEventListenerWithSceneGraphPriority(onBlockDestroyed, this);
+
+    //
 
     return ball;
 }
