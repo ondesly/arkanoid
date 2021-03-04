@@ -6,6 +6,8 @@
 //  Copyright © 2021 Dmitrii Torkhov. All rights reserved.
 //
 
+#include "Resources.h"
+
 #include "Block.h"
 
 namespace {
@@ -31,7 +33,23 @@ bool ar::Block::initWithSpriteFrameName(const std::string &name, size_t type) {
         return false;
     }
 
+    //
+
+    auto shadow = cocos2d::Sprite::createWithSpriteFrameName(texture::game::empty);
+    shadow->setColor(cocos2d::Color3B::BLACK);
+    shadow->setOpacity(cShadowOpacity);
+    shadow->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
+    shadow->setPosition({getContentSize().width / 2, -getContentSize().height});
+    shadow->setScale(
+            getContentSize().width / shadow->getContentSize().width,
+            getContentSize().height / shadow->getContentSize().height);
+    addChild(shadow);
+
+    //
+
     setType(type);
+
+    //
 
     return true;
 }
