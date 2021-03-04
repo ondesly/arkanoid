@@ -54,6 +54,10 @@ namespace ar {
 
     }
 
-    extern const uint8_t cShadowOpacity;
+    namespace opacity {
+
+        extern const uint8_t shadow;
+
+    }
 
 }

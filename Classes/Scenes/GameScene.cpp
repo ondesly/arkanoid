@@ -141,7 +141,7 @@ void ar::GameScene::addFrame(const std::shared_ptr<Physics> &physics, float head
 void ar::GameScene::addFrameShadow(float size, const cocos2d::Vec2 &offset) {
     auto leftShadow = cocos2d::Sprite::createWithSpriteFrameName(texture::game::empty);
     leftShadow->setColor(cocos2d::Color3B::BLACK);
-    leftShadow->setOpacity(cShadowOpacity);
+    leftShadow->setOpacity(opacity::shadow);
     leftShadow->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
     leftShadow->setPosition({offset.x, 0.F});
     leftShadow->setScale(size / leftShadow->getContentSize().width,
@@ -150,7 +150,7 @@ void ar::GameScene::addFrameShadow(float size, const cocos2d::Vec2 &offset) {
 
     auto topShadow = cocos2d::Sprite::createWithSpriteFrameName(texture::game::empty);
     topShadow->setColor(cocos2d::Color3B::BLACK);
-    topShadow->setOpacity(cShadowOpacity);
+    topShadow->setOpacity(opacity::shadow);
     topShadow->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_LEFT);
     topShadow->setPosition({offset.x + size, getContentSize().height - offset.y});
     topShadow->setScale((getContentSize().width - offset.x - size) / leftShadow->getContentSize().width,

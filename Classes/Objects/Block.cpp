@@ -39,7 +39,7 @@ bool ar::Block::initWithSpriteFrameName(const std::string &name, int type) {
 
     auto shadow = cocos2d::Sprite::createWithSpriteFrameName(texture::game::empty);
     shadow->setColor(cocos2d::Color3B::BLACK);
-    shadow->setOpacity(cShadowOpacity);
+    shadow->setOpacity(opacity::shadow);
     shadow->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
     shadow->setPosition({getContentSize().width / 2, -getContentSize().height});
     shadow->setScale(

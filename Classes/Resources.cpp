@@ -54,6 +54,10 @@ namespace ar {
 
     }
 
-    const uint8_t cShadowOpacity = 100;
+    namespace opacity {
+
+        const uint8_t shadow = 100;
+
+    }
 
 }
