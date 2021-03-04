@@ -25,6 +25,8 @@ namespace ar {
 
     public:
 
+        cocos2d::Rect getVisibleRect() const;
+
         void updatePosition();
 
         void updateVelocityAfterCollision(Body *obstacle);

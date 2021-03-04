@@ -16,6 +16,18 @@ bool ar::Body::init() {
     return true;
 }
 
+cocos2d::Rect ar::Body::getVisibleRect() const {
+    const auto &transform = getNodeToParentTransform();
+
+    cocos2d::Vec3 p0;
+    transform.transformPoint(&p0);
+
+    cocos2d::Vec3 p1{getContentSize().width, getContentSize().height, 0.F};
+    transform.transformPoint(&p1);
+
+    return {std::min(p0.x, p1.x), std::min(p0.y, p1.y), std::max(p0.x, p1.x), std::max(p0.y, p1.y)};
+}
+
 void ar::Body::updatePosition() {
     setPosition(getPosition() + mVelocity * mSpeed);
 }
@@ -88,12 +100,11 @@ ar::CircleBody *ar::CircleBody::create() {
 
 bool ar::CircleBody::isCollided(ar::Body *obstacle) const {
     const auto &pos = getPosition();
-    const auto &obstacleSize = obstacle->getContentSize();
-    const auto obstaclePos = obstacle->getPosition() - obstacleSize / 2;
+    const auto rect = obstacle->getVisibleRect();
 
     const cocos2d::Vec2 nearest{
-            std::max(std::min(pos.x, obstaclePos.x + obstacleSize.width), obstaclePos.x),
-            std::max(std::min(pos.y, obstaclePos.y + obstacleSize.height), obstaclePos.y)};
+            std::max(std::min(pos.x, rect.size.width), rect.origin.x),
+            std::max(std::min(pos.y, rect.size.height), rect.origin.y)};
 
     const auto distance = pos.getDistance(nearest);
     return distance <= getContentSize().width / 2;
@@ -102,24 +113,23 @@ bool ar::CircleBody::isCollided(ar::Body *obstacle) const {
 cocos2d::Vec2 ar::CircleBody::getVelocityAfterCollision(ar::Body *obstacle) const {
     const auto &pos = getPosition();
     const auto &velocity = getVelocity();
-    const auto &obstacleSize = obstacle->getContentSize();
-    const auto obstaclePos = obstacle->getPosition() - obstacleSize / 2;
+    const auto rect = obstacle->getVisibleRect();
 
     auto result = velocity;
 
     // Horizontal
 
-    if (pos.x < obstaclePos.x) {
+    if (pos.x < rect.origin.x) {
         result.x = -std::abs(result.x);
-    } else if (pos.x > obstaclePos.x + obstacleSize.width) {
+    } else if (pos.x > rect.size.width) {
         result.x = std::abs(result.x);
     }
 
     // Vertical
 
-    if (pos.y < obstaclePos.y) {
+    if (pos.y < rect.origin.y) {
         result.y = -std::abs(result.y);
-    } else if (pos.y > obstaclePos.y + obstacleSize.height) {
+    } else if (pos.y > rect.size.height) {
         result.y = std::abs(result.y);
     }
 
