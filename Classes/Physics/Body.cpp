@@ -80,6 +80,16 @@ ar::RectangleBody *ar::RectangleBody::create() {
     return nullptr;
 }
 
+ar::RectangleBody *ar::RectangleBody::createWithSpriteFrameName(const std::string &name) {
+    auto body = new(std::nothrow) RectangleBody();
+    if (body && body->initWithSpriteFrameName(name)) {
+        body->autorelease();
+        return body;
+    }
+    CC_SAFE_DELETE(body);
+    return nullptr;
+}
+
 bool ar::RectangleBody::isCollided(ar::Body *obstacle) const {
     return false;
 }

@@ -47,30 +47,7 @@ bool ar::GameScene::init() {
 
     //
 
-    mPhysics = std::make_unique<Physics>(cPhysicsTicksPerFrame);
-
-    //
-
-    auto left = RectangleBody::create();
-    left->setTextureRect(cocos2d::Rect(cocos2d::Vec2::ZERO, {10.F, getContentSize().height}));
-    left->setPosition({100.F, getContentSize().height / 2});
-    addChild(left);
-
-    mPhysics->registerObstacle(left);
-
-    auto right = RectangleBody::create();
-    right->setTextureRect(cocos2d::Rect(cocos2d::Vec2::ZERO, {10.F, getContentSize().height}));
-    right->setPosition({getContentSize().width - 100.F, getContentSize().height / 2});
-    addChild(right);
-
-    mPhysics->registerObstacle(right);
-
-    auto top = RectangleBody::create();
-    top->setTextureRect(cocos2d::Rect(cocos2d::Vec2::ZERO, {getContentSize().width, 10.F}));
-    top->setPosition({getContentSize().width / 2, getContentSize().height - 100.F});
-    addChild(top);
-
-    mPhysics->registerObstacle(top);
+    mPhysics = std::make_shared<Physics>(cPhysicsTicksPerFrame);
 
     //
 
@@ -116,7 +93,7 @@ bool ar::GameScene::init() {
 
     //
 
-    addFrame();
+    addFrame(mPhysics);
 
     //
 
@@ -154,8 +131,8 @@ void ar::GameScene::addBackground() {
     bg->getTexture()->setTexParameters({GL_NEAREST, GL_NEAREST, GL_REPEAT, GL_REPEAT});
 }
 
-void ar::GameScene::addFrame() {
-    auto frame = Frame::create();
+void ar::GameScene::addFrame(const std::shared_ptr<Physics> &physics) {
+    auto frame = Frame::create(physics);
     frame->setHeaderSize(getContentSize().width / 10.F);
     frame->setContentSize(getContentSize());
     addChild(frame);

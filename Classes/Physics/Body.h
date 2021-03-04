@@ -56,6 +56,8 @@ namespace ar {
 
         static RectangleBody *create();
 
+        static RectangleBody *createWithSpriteFrameName(const std::string &name);
+
     public:
 
         bool isCollided(Body *obstacle) const override;

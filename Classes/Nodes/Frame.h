@@ -8,14 +8,18 @@
 
 #pragma once
 
+#include <memory>
+
 #include <2d/CCNode.h>
 
 namespace ar {
 
+    class Physics;
+
     class Frame : public cocos2d::Node {
     public:
 
-        static Frame *create();
+        static Frame *create(const std::shared_ptr<Physics> &physics);
 
     public:
 
@@ -26,6 +30,12 @@ namespace ar {
     private:
 
         float mHeaderSize = 0;
+
+        std::shared_ptr<Physics> mPhysics;
+
+    private:
+
+        Frame(const std::shared_ptr<Physics> &physics);
 
     private:
 

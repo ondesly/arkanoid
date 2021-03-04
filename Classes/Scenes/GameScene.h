@@ -41,7 +41,7 @@ namespace ar {
 
     private:
 
-        std::unique_ptr<Physics> mPhysics;
+        std::shared_ptr<Physics> mPhysics;
 
         cocos2d::EventListenerTouchOneByOne *mTouchListener;
 
@@ -52,7 +52,7 @@ namespace ar {
 
         void addBackground();
 
-        void addFrame();
+        void addFrame(const std::shared_ptr<Physics> &physics);
 
         void enableTouch();
 
