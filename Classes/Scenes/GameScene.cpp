@@ -63,7 +63,7 @@ bool ar::GameScene::init() {
 
     //
 
-    mHeaderSize = getContentSize().width / 10.F;
+    mHeaderSize = getContentSize().width * 0.2F;
     mFrameSize = cocos2d::SpriteFrameCache::getInstance()->
             getSpriteFrameByName(texture::game::tube)->getOriginalSize().height;
     const auto blockSize = (getContentSize().width - mFrameSize * 2) / cBlocksHCount;

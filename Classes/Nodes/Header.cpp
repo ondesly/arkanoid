@@ -48,17 +48,17 @@ bool ar::Header::init(const cocos2d::Size &size) {
 
     //
 
-    const float fontSize = getContentSize().height * 0.7F;
+    const float fontSize = getContentSize().height * 0.35F;
 
     auto scoreTitle = cocos2d::Label::createWithTTF(cScoreTitle, font::arcadeClassic, fontSize, {},
             cocos2d::TextHAlignment::CENTER, cocos2d::TextVAlignment::CENTER);
     scoreTitle->setTextColor(cocos2d::Color4B::RED);
-    scoreTitle->setPosition({getContentSize().width / 2, getContentSize().height / 4 * 3});
+    scoreTitle->setPosition({getContentSize().width / 2, getContentSize().height / 8 * 3});
     addChild(scoreTitle);
 
     mScoreValue = cocos2d::Label::createWithTTF("0", font::arcadeClassic, fontSize, {},
             cocos2d::TextHAlignment::CENTER, cocos2d::TextVAlignment::CENTER);
-    mScoreValue->setPosition({getContentSize().width / 2, getContentSize().height / 4});
+    mScoreValue->setPosition({getContentSize().width / 2, getContentSize().height / 8});
     addChild(mScoreValue);
 
     //
