@@ -23,6 +23,8 @@ namespace {
     const size_t cPhysicsTicksPerFrame = 10;
 
     const float cBallSpeed = 0.5F;
+    const float cBallAcceleration = 1.1F;
+    const size_t cDestroyedBlockCountToAccelerate = 5;
 
     const float cPlatformSpeed = 0.4F;
     const float cPlatformFriction = 0.5F;
@@ -86,6 +88,7 @@ bool ar::GameScene::init() {
 
     //
 
+    addListeners();
     enableTouch();
 
     //
@@ -194,23 +197,22 @@ ar::Platform *ar::GameScene::makePlatform() {
 
 ar::Body *ar::GameScene::makeBall() {
     auto ball = CircleBody::createWithSpriteFrameName(texture::game::ball);
-
-    mPhysics->registerAgent(ball);
-
     ball->setSpeed(cBallSpeed);
 
-    //
-
-    auto onBlockDestroyed = cocos2d::EventListenerCustom::create(event::onBlockDestroyed, [&, ball](cocos2d::EventCustom *event) {
-        ++mDestroyedBlocksCount;
-
-        if (mDestroyedBlocksCount % 5 == 0) {
-            ball->setSpeed(ball->getSpeed() * 1.1F);
-        }
-    });
-    getEventDispatcher()->addEventListenerWithSceneGraphPriority(onBlockDestroyed, this);
+    mPhysics->registerAgent(ball);
 
     //
 
     return ball;
+}
+
+void ar::GameScene::addListeners() {
+    auto onBlockDestroyed = cocos2d::EventListenerCustom::create(event::onBlockDestroyed, [&](cocos2d::EventCustom *event) {
+        ++mDestroyedBlocksCount;
+
+        if (mDestroyedBlocksCount % cDestroyedBlockCountToAccelerate == 0) {
+            mBall->setSpeed(mBall->getSpeed() * cBallAcceleration);
+        }
+    });
+    getEventDispatcher()->addEventListenerWithSceneGraphPriority(onBlockDestroyed, this);
 }

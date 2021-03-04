@@ -75,6 +75,8 @@ namespace ar {
 
         void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unusedEvent);
 
+        void addListeners();
+
     };
 
 }
