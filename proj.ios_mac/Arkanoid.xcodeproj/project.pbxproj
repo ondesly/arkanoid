@@ -25,9 +25,11 @@
 		907053A22273805100ADB1F3 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9070539F2273805100ADB1F3 /* logo.png */; };
 		907053A32273805100ADB1F3 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 907053A02273805100ADB1F3 /* logo@3x.png */; };
 		907053A42273805100ADB1F3 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 907053A12273805100ADB1F3 /* logo@2x.png */; };
+		B139917DAB8A3EDD35D31C4C /* CircleBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1399367386DF0FB2C46EFBC /* CircleBody.cpp */; };
 		B13992ACCB54569B84D230C1 /* Physics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B13992A1738A693B55E5F9F1 /* Physics.cpp */; };
 		B13996BFB0CCB51671411E98 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B13997DADB4140C488A7EF5A /* GameScene.cpp */; };
 		B13997683C16F7A48296CB69 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B13999B7A117835E7BA572C8 /* Platform.cpp */; };
+		B1399A382124072AD2AF2750 /* RectangleBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B13991BEA27F1E3426BDE4CD /* RectangleBody.cpp */; };
 		B1399A8F0ECE357743FAAF96 /* Frame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1399200B34625FD1C4824F6 /* Frame.cpp */; };
 		B1399C58A9EF38FF2C91982C /* Body.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1399F2F86FBFD67DA0EADBF /* Body.cpp */; };
 		B1399CAA144E233356614EA6 /* Block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1399D8EFB4568924CD7FE40 /* Block.cpp */; };
@@ -94,17 +96,21 @@
 		9070539F2273805100ADB1F3 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		907053A02273805100ADB1F3 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
 		907053A12273805100ADB1F3 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
+		B13991BEA27F1E3426BDE4CD /* RectangleBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectangleBody.cpp; sourceTree = "<group>"; };
 		B1399200B34625FD1C4824F6 /* Frame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Frame.cpp; sourceTree = "<group>"; };
 		B1399204C3D7A746C646F411 /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
 		B13992A1738A693B55E5F9F1 /* Physics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Physics.cpp; sourceTree = "<group>"; };
+		B1399367386DF0FB2C46EFBC /* CircleBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CircleBody.cpp; sourceTree = "<group>"; };
 		B139938E02D908AEECC214DE /* Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Frame.h; sourceTree = "<group>"; };
 		B13994AFF400AF597B34934F /* Body.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Body.h; sourceTree = "<group>"; };
 		B13996F737E4824FBBA349A6 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		B139971C8FC10F33FE89F5E6 /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
+		B13997B262E32EF83DA5197C /* CircleBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleBody.h; sourceTree = "<group>"; };
 		B13997DADB4140C488A7EF5A /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
 		B13999B7A117835E7BA572C8 /* Platform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Platform.cpp; sourceTree = "<group>"; };
 		B1399D8EFB4568924CD7FE40 /* Block.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Block.cpp; sourceTree = "<group>"; };
 		B1399DD6F56E981E9060EB7F /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
+		B1399E682301A494F7710CEB /* RectangleBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectangleBody.h; sourceTree = "<group>"; };
 		B1399F2F86FBFD67DA0EADBF /* Body.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Body.cpp; sourceTree = "<group>"; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -254,6 +260,10 @@
 				B13994AFF400AF597B34934F /* Body.h */,
 				B13992A1738A693B55E5F9F1 /* Physics.cpp */,
 				B1399DD6F56E981E9060EB7F /* Physics.h */,
+				B13991BEA27F1E3426BDE4CD /* RectangleBody.cpp */,
+				B1399E682301A494F7710CEB /* RectangleBody.h */,
+				B1399367386DF0FB2C46EFBC /* CircleBody.cpp */,
+				B13997B262E32EF83DA5197C /* CircleBody.h */,
 			);
 			path = Physics;
 			sourceTree = "<group>";
@@ -383,6 +393,8 @@
 				B13997683C16F7A48296CB69 /* Platform.cpp in Sources */,
 				B1399CAA144E233356614EA6 /* Block.cpp in Sources */,
 				B1399A8F0ECE357743FAAF96 /* Frame.cpp in Sources */,
+				B1399A382124072AD2AF2750 /* RectangleBody.cpp in Sources */,
+				B139917DAB8A3EDD35D31C4C /* CircleBody.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

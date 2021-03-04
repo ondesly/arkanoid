@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "Physics/Body.h"
+#include "Physics/RectangleBody.h"
 
 namespace ar {
 

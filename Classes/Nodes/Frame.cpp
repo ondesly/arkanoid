@@ -6,7 +6,7 @@
 //  Copyright © 2021 Dmitrii Torkhov. All rights reserved.
 //
 
-#include "Physics/Body.h"
+#include "Physics/RectangleBody.h"
 #include "Physics/Physics.h"
 
 #include "Frame.h"

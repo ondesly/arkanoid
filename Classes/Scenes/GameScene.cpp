@@ -13,7 +13,7 @@
 #include "Nodes/Frame.h"
 #include "Objects/Block.h"
 #include "Objects/Platform.h"
-#include "Physics/Body.h"
+#include "Physics/CircleBody.h"
 #include "Physics/Physics.h"
 
 #include "GameScene.h"
