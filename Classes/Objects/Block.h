@@ -21,23 +21,23 @@ namespace ar {
     class Block : public RectangleBody {
     public:
 
-        static Block *createWithSpriteFrameName(const std::string &name, size_t type);
+        static Block *createWithSpriteFrameName(const std::string &name, int type);
 
     public:
 
-        bool initWithSpriteFrameName(const std::string &name, size_t type);
+        bool initWithSpriteFrameName(const std::string &name, int type);
 
         void onCollision() override;
 
     private:
 
-        size_t mType = 0;
+        int mType = 0;
 
     private:
 
-        void setType(size_t type);
+        void setType(int type);
 
-        const cocos2d::Color3B &getColor(size_t type) const;
+        const cocos2d::Color3B &getColor(int type) const;
 
     };
 

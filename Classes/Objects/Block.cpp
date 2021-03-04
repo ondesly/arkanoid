@@ -18,7 +18,7 @@ namespace {
 
 }
 
-ar::Block *ar::Block::createWithSpriteFrameName(const std::string &name, size_t type) {
+ar::Block *ar::Block::createWithSpriteFrameName(const std::string &name, int type) {
     auto block = new(std::nothrow) Block();
     if (block && block->initWithSpriteFrameName(name, type)) {
         block->autorelease();
@@ -28,7 +28,7 @@ ar::Block *ar::Block::createWithSpriteFrameName(const std::string &name, size_t 
     return nullptr;
 }
 
-bool ar::Block::initWithSpriteFrameName(const std::string &name, size_t type) {
+bool ar::Block::initWithSpriteFrameName(const std::string &name, int type) {
     if (!RectangleBody::initWithSpriteFrameName(name)) {
         return false;
     }
@@ -54,18 +54,18 @@ bool ar::Block::initWithSpriteFrameName(const std::string &name, size_t type) {
     return true;
 }
 
-void ar::Block::setType(size_t type) {
+void ar::Block::setType(int type) {
     mType = type;
 
     setColor(getColor(type));
-    setVisible(type < 3);
+    setVisible(type >= 0);
 }
 
 void ar::Block::onCollision() {
     setType(--mType);
 }
 
-const cocos2d::Color3B &ar::Block::getColor(size_t type) const {
+const cocos2d::Color3B &ar::Block::getColor(int type) const {
     switch (type) {
         case 0:
             return cGreen;

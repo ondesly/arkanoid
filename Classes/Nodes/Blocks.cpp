@@ -45,7 +45,7 @@ void ar::Blocks::setBlocksSize(float blockSize) {
 
 void ar::Blocks::layout() {
     static std::default_random_engine gen{std::random_device{}()};
-    static std::uniform_int_distribution<size_t> distrib{0, 2};
+    static std::uniform_int_distribution<int> distrib{0, 2};
 
     for (size_t i = 0; i < mHCount; ++i) {
         for (size_t j = 0; j < mVCount; ++j) {
