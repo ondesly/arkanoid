@@ -10,6 +10,7 @@
 
 #include <base/CCEventListenerTouch.h>
 
+#include "Nodes/Frame.h"
 #include "Objects/Block.h"
 #include "Objects/Platform.h"
 #include "Physics/Body.h"
@@ -115,6 +116,10 @@ bool ar::GameScene::init() {
 
     //
 
+    addFrame();
+
+    //
+
     enableTouch();
 
     //
@@ -147,4 +152,13 @@ void ar::GameScene::addBackground() {
     addChild(bg);
 
     bg->getTexture()->setTexParameters({GL_NEAREST, GL_NEAREST, GL_REPEAT, GL_REPEAT});
+}
+
+void ar::GameScene::addFrame() {
+    auto frame = Frame::create();
+    frame->setHeaderSize(getContentSize().width / 10.F);
+    frame->setContentSize(getContentSize());
+    addChild(frame);
+
+    frame->layout();
 }

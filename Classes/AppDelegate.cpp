@@ -49,7 +49,9 @@ namespace {
 
     const std::vector<int> cImageSizes{720, 1080, 1536, 2048};
     const char *cTexturesPath = "textures/";
+
     const char *cBgTextureFileName = "bg.plist";
+    const char *cGameTextureFileName = "game.plist";
 
 }
 
@@ -113,6 +115,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // Load textures
 
     cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile(cBgTextureFileName);
+    cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile(cGameTextureFileName);
 
     // create a scene. it's an autorelease object
     auto scene = ar::GameScene::create();
