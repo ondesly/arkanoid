@@ -29,13 +29,13 @@ namespace ar {
 
         void onCollision() override;
 
+        void setType(int type);
+
     private:
 
         int mType = 0;
 
     private:
-
-        void setType(int type);
 
         const cocos2d::Color3B &getColor(int type) const;
 

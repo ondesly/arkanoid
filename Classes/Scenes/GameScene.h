@@ -84,6 +84,8 @@ namespace ar {
 
         void addListeners();
 
+        void reset();
+
     };
 
 }

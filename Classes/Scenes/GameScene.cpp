@@ -72,13 +72,9 @@ bool ar::GameScene::init() {
     addChild(mBlocks);
 
     mPlatform = makePlatform();
-    mPlatform->setPosition(getContentSize() / 2);
     addChild(mPlatform);
 
     mBall = makeBall();
-    mBall->setPosition({
-            mPlatform->getPosition().x,
-            mPlatform->getPosition().y + mPlatform->getContentSize().height / 2 + mBall->getContentSize().height / 2});
     addChild(mBall);
 
     //
@@ -96,7 +92,36 @@ bool ar::GameScene::init() {
 
     //
 
+    reset();
+
+    //
+
     return true;
+}
+
+void ar::GameScene::reset() {
+    mScore = 0;
+    mDestroyedBlocksCount = 0;
+
+    //
+
+    mPlatform->setVisible(true);
+    mPlatform->setVelocity({});
+    mPlatform->setPosition(getContentSize() / 2);
+
+    mBall->setVisible(true);
+    mBall->setVelocity({});
+    mBall->setPosition({
+            mPlatform->getPosition().x,
+            mPlatform->getPosition().y + mPlatform->getContentSize().height / 2 + mBall->getContentSize().height / 2});
+
+    //
+
+    mBlocks->reset();
+
+    //
+
+    mTouchListener->setEnabled(true);
 }
 
 bool ar::GameScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unusedEvent) {

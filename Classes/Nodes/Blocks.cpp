@@ -44,19 +44,26 @@ void ar::Blocks::setBlocksSize(float blockSize) {
 }
 
 void ar::Blocks::layout() {
-    static std::default_random_engine gen{std::random_device{}()};
-    static std::uniform_int_distribution<int> distrib{0, 2};
-
     for (size_t i = 0; i < mHCount; ++i) {
         for (size_t j = 0; j < mVCount; ++j) {
-            auto block = Block::createWithSpriteFrameName(texture::game::block, distrib(gen));
+            auto block = Block::createWithSpriteFrameName(texture::game::block, 0);
             block->setPosition({
                     mOffset.x + (i + 0.5F) * mBlockSize,
                     getContentSize().height - mOffset.y - (j + 0.5F) * (block->getContentSize().height)});
             block->setScaleX(mBlockSize / block->getContentSize().width);
             addChild(block);
 
+            mBlocks.push_back(block);
             mPhysics->registerObstacle(block);
         }
+    }
+}
+
+void ar::Blocks::reset() {
+    static std::default_random_engine gen{std::random_device{}()};
+    static std::uniform_int_distribution<int> distrib{0, 2};
+
+    for (auto block : mBlocks) {
+        block->setType(distrib(gen));
     }
 }

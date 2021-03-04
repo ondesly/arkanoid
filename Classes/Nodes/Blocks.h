@@ -9,10 +9,13 @@
 #pragma once
 
 #include <memory>
+#include <vector>
 
 #include <2d/CCSpriteBatchNode.h>
 
 namespace ar {
+
+    class Block;
 
     class Physics;
 
@@ -31,6 +34,8 @@ namespace ar {
 
         void layout();
 
+        void reset();
+
     private:
 
         size_t mHCount = 0;
@@ -39,6 +44,8 @@ namespace ar {
         float mBlockSize = 0;
 
         std::shared_ptr<Physics> mPhysics;
+
+        std::vector<Block *> mBlocks;
 
     private:
 
