@@ -10,6 +10,12 @@
 
 #include "Physics/RectangleBody.h"
 
+namespace coco2d {
+
+    class Color3B;
+
+}
+
 namespace ar {
 
     class Block : public RectangleBody {
@@ -30,6 +36,8 @@ namespace ar {
     private:
 
         void setType(size_t type);
+
+        const cocos2d::Color3B &getColor(size_t type) const;
 
     };
 

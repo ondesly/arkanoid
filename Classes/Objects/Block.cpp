@@ -8,6 +8,14 @@
 
 #include "Block.h"
 
+namespace {
+
+    const cocos2d::Color3B cRed{255, 0, 0};
+    const cocos2d::Color3B cGreen{0, 255, 0};
+    const cocos2d::Color3B cBlue{0, 112, 255};
+
+}
+
 ar::Block *ar::Block::createWithSpriteFrameName(const std::string &name, size_t type) {
     auto block = new(std::nothrow) Block();
     if (block && block->initWithSpriteFrameName(name, type)) {
@@ -31,22 +39,23 @@ bool ar::Block::initWithSpriteFrameName(const std::string &name, size_t type) {
 void ar::Block::setType(size_t type) {
     mType = type;
 
-    switch (type) {
-        case 0:
-            setColor(cocos2d::Color3B::GREEN);
-            break;
-        case 1:
-            setColor(cocos2d::Color3B::RED);
-            break;
-        case 2:
-            setColor(cocos2d::Color3B::BLUE);
-            break;
-        default:
-            setVisible(false);
-            break;
-    }
+    setColor(getColor(type));
+    setVisible(type < 3);
 }
 
 void ar::Block::onCollision() {
     setType(--mType);
+}
+
+const cocos2d::Color3B &ar::Block::getColor(size_t type) const {
+    switch (type) {
+        case 0:
+            return cGreen;
+        case 1:
+            return cRed;
+        case 2:
+            return cBlue;
+        default:
+            return cocos2d::Color3B::WHITE;
+    }
 }
