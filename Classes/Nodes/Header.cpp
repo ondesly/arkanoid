@@ -10,8 +10,6 @@
 
 #include <2d/CCLabel.h>
 #include <2d/CCSprite.h>
-#include <base/CCEventDispatcher.h>
-#include <base/CCEventListenerCustom.h>
 
 #include "Resources.h"
 
@@ -58,20 +56,16 @@ bool ar::Header::init(const cocos2d::Size &size) {
     scoreTitle->setPosition({getContentSize().width / 2, getContentSize().height / 4 * 3});
     addChild(scoreTitle);
 
-    mScoreValue = cocos2d::Label::createWithTTF(std::to_string(mScore), font::arcadeClassic, fontSize, {},
+    mScoreValue = cocos2d::Label::createWithTTF("0", font::arcadeClassic, fontSize, {},
             cocos2d::TextHAlignment::CENTER, cocos2d::TextVAlignment::CENTER);
     mScoreValue->setPosition({getContentSize().width / 2, getContentSize().height / 4});
     addChild(mScoreValue);
 
     //
 
-    auto onBlockDestroyed = cocos2d::EventListenerCustom::create(event::onBlockDestroyed, [&](cocos2d::EventCustom *event) {
-        mScore += score::blockValue;
-        mScoreValue->setString(std::to_string(mScore));
-    });
-    getEventDispatcher()->addEventListenerWithSceneGraphPriority(onBlockDestroyed, this);
-
-    //
-
     return true;
+}
+
+void ar::Header::setScore(size_t score) {
+    mScoreValue->setString(std::to_string(score));
 }

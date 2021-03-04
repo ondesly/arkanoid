@@ -84,7 +84,10 @@ bool ar::GameScene::init() {
     //
 
     addFrame(mPhysics, mHeaderSize);
-    addHeader(mHeaderSize);
+
+    mHeader = makeHeader(mHeaderSize);
+    mHeader->setPosition({0.F, getContentSize().height});
+    addChild(mHeader);
 
     //
 
@@ -158,11 +161,11 @@ void ar::GameScene::addFrameShadow(float size, const cocos2d::Vec2 &offset) {
     addChild(topShadow);
 }
 
-void ar::GameScene::addHeader(float headerSize) {
+ar::Header *ar::GameScene::makeHeader(float headerSize) {
     auto header = Header::create({getContentSize().width, headerSize});
     header->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_LEFT);
-    header->setPosition({0.F, getContentSize().height});
-    addChild(header);
+
+    return header;
 }
 
 ar::Blocks *ar::GameScene::makeBlocks(const std::shared_ptr<Physics> &physics, float blockSize, const cocos2d::Vec2 &offset) {
@@ -208,7 +211,13 @@ ar::Body *ar::GameScene::makeBall() {
 
 void ar::GameScene::addListeners() {
     auto onBlockDestroyed = cocos2d::EventListenerCustom::create(event::onBlockDestroyed, [&](cocos2d::EventCustom *event) {
-        ++mDestroyedBlocksCount;
+        mScore += score::blockValue;
+
+        mHeader->setScore(mScore);
+
+        //
+
+        mDestroyedBlocksCount += 1;
 
         if (mDestroyedBlocksCount % cDestroyedBlockCountToAccelerate == 0) {
             mBall->setSpeed(mBall->getSpeed() * cBallAcceleration);

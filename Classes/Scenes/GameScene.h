@@ -28,6 +28,8 @@ namespace ar {
 
     class Body;
 
+    class Header;
+
     class Physics;
 
     class Platform;
@@ -47,10 +49,12 @@ namespace ar {
 
         cocos2d::EventListenerTouchOneByOne *mTouchListener;
 
+        Header *mHeader;
         Blocks *mBlocks;
         Body *mBall;
         Platform *mPlatform;
 
+        size_t mScore = 0;
         size_t mDestroyedBlocksCount = 0;
 
         float mHeaderSize = 0;
@@ -64,7 +68,7 @@ namespace ar {
 
         void addFrameShadow(float size, const cocos2d::Vec2 &offset);
 
-        void addHeader(float headerSize);
+        Header *makeHeader(float headerSize);
 
         Blocks *makeBlocks(const std::shared_ptr<Physics> &physics, float blockSize, const cocos2d::Vec2 &offset);
 

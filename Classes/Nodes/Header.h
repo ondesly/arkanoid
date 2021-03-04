@@ -27,9 +27,9 @@ namespace ar {
 
         bool init(const cocos2d::Size &size);
 
-    private:
+        void setScore(size_t score);
 
-        size_t mScore = 0;
+    private:
 
         cocos2d::Label *mScoreValue;
 
