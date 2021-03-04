@@ -9,6 +9,7 @@
 #pragma once
 
 #include <memory>
+#include <string>
 
 #include <2d/CCScene.h>
 
@@ -83,6 +84,8 @@ namespace ar {
         void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unusedEvent);
 
         void addListeners();
+
+        void showDialog(const std::string &title);
 
         void startGame();
 

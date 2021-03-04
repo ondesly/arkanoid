@@ -9,6 +9,7 @@
 #include <base/CCEventListenerTouch.h>
 
 #include "Nodes/Blocks.h"
+#include "Nodes/Dialog.h"
 #include "Nodes/Frame.h"
 #include "Nodes/Header.h"
 #include "Objects/Ball.h"
@@ -31,6 +32,9 @@ namespace {
 
     const size_t cBlocksHCount = 15;
     const size_t cBlocksVCount = 5;
+
+    const char *cGameComplete = "GAME COMPLETE";
+    const char *cGameOver = "GAME OVER";
 
 }
 
@@ -260,6 +264,29 @@ void ar::GameScene::addListeners() {
         if (mDestroyedBlocksCount % cDestroyedBlockCountToAccelerate == 0) {
             mBall->setSpeed(mBall->getSpeed() * cBallAcceleration);
         }
+
+        if (mDestroyedBlocksCount == cBlocksHCount * cBlocksVCount) {
+            endGame();
+            showDialog(cGameComplete);
+        }
     });
     getEventDispatcher()->addEventListenerWithSceneGraphPriority(onBlockDestroyed, this);
+
+    auto onBallOut = cocos2d::EventListenerCustom::create(event::onBallOut, [&](cocos2d::EventCustom *event) {
+        endGame();
+        showDialog(cGameOver);
+    });
+    getEventDispatcher()->addEventListenerWithSceneGraphPriority(onBallOut, this);
+}
+
+void ar::GameScene::showDialog(const std::string &title) {
+    const cocos2d::Size size{getContentSize().width - mFrameSize * 2, getContentSize().height - mHeaderSize - mFrameSize};
+
+    auto dialog = Dialog::create(size, title, std::to_string(mScore), [&](Dialog *dialog) {
+        dialog->removeFromParent();
+
+        startGame();
+    });
+    dialog->setPosition({getContentSize().width / 2, 0.F});
+    addChild(dialog);
 }
