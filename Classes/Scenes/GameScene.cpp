@@ -111,9 +111,11 @@ void ar::GameScene::startGame() {
 
     //
 
+    const auto platformY = getContentSize().height - mHeaderSize - mFrameSize - (getContentSize().width - mFrameSize * 2);
+
     mPlatform->setVisible(true);
     mPlatform->setVelocity({});
-    mPlatform->setPosition(getContentSize() / 2);
+    mPlatform->setPosition({getContentSize().width / 2, platformY});
 
     mBall->setVisible(true);
     mBall->setVelocity({});
