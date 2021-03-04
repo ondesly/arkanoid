@@ -24,9 +24,9 @@ namespace cocos2d {
 
 namespace ar {
 
-    class Blocks;
+    class Ball;
 
-    class Body;
+    class Blocks;
 
     class Header;
 
@@ -51,7 +51,7 @@ namespace ar {
 
         Header *mHeader;
         Blocks *mBlocks;
-        Body *mBall;
+        Ball *mBall;
         Platform *mPlatform;
 
         size_t mScore = 0;
@@ -74,7 +74,7 @@ namespace ar {
 
         Platform *makePlatform();
 
-        Body *makeBall();
+        Ball *makeBall();
 
         void enableTouch();
 

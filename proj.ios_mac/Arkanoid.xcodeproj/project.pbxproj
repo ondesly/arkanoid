@@ -37,6 +37,7 @@
 		B13999767F85E742B7A6C568 /* Header.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B139908BA722581CD7827612 /* Header.cpp */; };
 		B1399A382124072AD2AF2750 /* RectangleBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B13991BEA27F1E3426BDE4CD /* RectangleBody.cpp */; };
 		B1399A8F0ECE357743FAAF96 /* Frame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1399200B34625FD1C4824F6 /* Frame.cpp */; };
+		B1399BCBD1D8484C66F192EC /* Ball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1399BE4259B4B9532F9535E /* Ball.cpp */; };
 		B1399C58A9EF38FF2C91982C /* Body.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1399F2F86FBFD67DA0EADBF /* Body.cpp */; };
 		B1399CAA144E233356614EA6 /* Block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1399D8EFB4568924CD7FE40 /* Block.cpp */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -116,6 +117,7 @@
 		B13994436B4684F6FAF6A9DF /* Resources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resources.h; sourceTree = "<group>"; };
 		B139944D035E1F1165AC3D5A /* Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Blocks.h; sourceTree = "<group>"; };
 		B13994AFF400AF597B34934F /* Body.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Body.h; sourceTree = "<group>"; };
+		B139953D7110F179B7F32357 /* Ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ball.h; sourceTree = "<group>"; };
 		B13996F737E4824FBBA349A6 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		B139971C8FC10F33FE89F5E6 /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
 		B13997B262E32EF83DA5197C /* CircleBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleBody.h; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 		B13999552460526FF5994FF3 /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		B13999B7A117835E7BA572C8 /* Platform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Platform.cpp; sourceTree = "<group>"; };
 		B1399B2556AF13CD66280A6E /* Blocks.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Blocks.cpp; sourceTree = "<group>"; };
+		B1399BE4259B4B9532F9535E /* Ball.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ball.cpp; sourceTree = "<group>"; };
 		B1399D8EFB4568924CD7FE40 /* Block.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Block.cpp; sourceTree = "<group>"; };
 		B1399DD6F56E981E9060EB7F /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
 		B1399E682301A494F7710CEB /* RectangleBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectangleBody.h; sourceTree = "<group>"; };
@@ -302,6 +305,8 @@
 				B139971C8FC10F33FE89F5E6 /* Platform.h */,
 				B1399D8EFB4568924CD7FE40 /* Block.cpp */,
 				B1399204C3D7A746C646F411 /* Block.h */,
+				B1399BE4259B4B9532F9535E /* Ball.cpp */,
+				B139953D7110F179B7F32357 /* Ball.h */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -427,6 +432,7 @@
 				B1399649DAC8AE985732C6D5 /* Blocks.cpp in Sources */,
 				B13999767F85E742B7A6C568 /* Header.cpp in Sources */,
 				B13998FA31143C9DEE325215 /* Dialog.cpp in Sources */,
+				B1399BCBD1D8484C66F192EC /* Ball.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

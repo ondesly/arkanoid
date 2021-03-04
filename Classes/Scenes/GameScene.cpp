@@ -11,8 +11,8 @@
 #include "Nodes/Blocks.h"
 #include "Nodes/Frame.h"
 #include "Nodes/Header.h"
+#include "Objects/Ball.h"
 #include "Objects/Platform.h"
-#include "Physics/CircleBody.h"
 #include "Physics/Physics.h"
 #include "Resources.h"
 
@@ -223,8 +223,8 @@ ar::Platform *ar::GameScene::makePlatform() {
     return platform;
 }
 
-ar::Body *ar::GameScene::makeBall() {
-    auto ball = CircleBody::createWithSpriteFrameName(texture::game::ball);
+ar::Ball *ar::GameScene::makeBall() {
+    auto ball = Ball::create(texture::game::ball);
     ball->setSpeed(cBallSpeed);
 
     mPhysics->registerAgent(ball);
