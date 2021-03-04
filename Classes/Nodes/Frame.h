@@ -10,13 +10,13 @@
 
 #include <memory>
 
-#include <2d/CCNode.h>
+#include <2d/CCSpriteBatchNode.h>
 
 namespace ar {
 
     class Physics;
 
-    class Frame : public cocos2d::Node {
+    class Frame : public cocos2d::SpriteBatchNode {
     public:
 
         static Frame *create(const std::shared_ptr<Physics> &physics);

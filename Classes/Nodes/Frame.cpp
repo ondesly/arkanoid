@@ -6,6 +6,8 @@
 //  Copyright © 2021 Dmitrii Torkhov. All rights reserved.
 //
 
+#include <2d/CCSpriteFrameCache.h>
+
 #include "Physics/RectangleBody.h"
 #include "Physics/Physics.h"
 
@@ -22,12 +24,14 @@ namespace {
         const char *cornerRight = "tube_corner_right";
 
     }
-    
+
 }
 
 ar::Frame *ar::Frame::create(const std::shared_ptr<Physics> &physics) {
+    auto emptyFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrame::empty);
+
     auto frame = new(std::nothrow) Frame(physics);
-    if (frame && frame->init()) {
+    if (frame && frame->initWithTexture(emptyFrame->getTexture())) {
         frame->autorelease();
         return frame;
     }
