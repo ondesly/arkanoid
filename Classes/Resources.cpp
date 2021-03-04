@@ -25,6 +25,7 @@ namespace ar {
             const char *ball = "ball";
             const char *platform = "platform";
             const char *platformShadow = "platform_shadow";
+            const char *block = "block";
 
             const char *tube = "tube";
             const char *tubeDecor = "tube_decor";

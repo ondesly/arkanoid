@@ -24,6 +24,8 @@ namespace cocos2d {
 
 namespace ar {
 
+    class Blocks;
+
     class Body;
 
     class Physics;
@@ -45,6 +47,7 @@ namespace ar {
 
         cocos2d::EventListenerTouchOneByOne *mTouchListener;
 
+        Blocks *mBlocks;
         Body *mBall;
         Platform *mPlatform;
 
@@ -57,6 +60,8 @@ namespace ar {
         void addFrame(const std::shared_ptr<Physics> &physics, float headerSize);
 
         void addFrameShadow(const cocos2d::Vec2 &offset);
+
+        Blocks *makeBlocks(const std::shared_ptr<Physics> &physics, const cocos2d::Vec2 &offset);
 
         Platform *makePlatform();
 

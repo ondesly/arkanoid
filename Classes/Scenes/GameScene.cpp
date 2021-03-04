@@ -6,12 +6,10 @@
 //  Copyright © 2021 Dmitrii Torkhov. All rights reserved.
 //
 
-#include <random>
-
 #include <base/CCEventListenerTouch.h>
 
+#include "Nodes/Blocks.h"
 #include "Nodes/Frame.h"
-#include "Objects/Block.h"
 #include "Objects/Platform.h"
 #include "Physics/CircleBody.h"
 #include "Physics/Physics.h"
@@ -27,6 +25,9 @@ namespace {
     const float cPlatformFriction = 0.5F;
 
     const int cShadowOpacity = 100;
+
+    const size_t cBlocksHCount = 10;
+    const size_t cBlocksVCount = 5;
 
 }
 
@@ -63,23 +64,8 @@ bool ar::GameScene::init() {
 
     //
 
-    std::default_random_engine gen{std::random_device{}()};
-    std::uniform_int_distribution<size_t> distrib{0, 2};
-
-    for (size_t i = 0; i < 10; ++i) {
-        for (size_t j = 0; j < 5; ++j) {
-            auto block = Block::create(distrib(gen));
-            block->setTextureRect(cocos2d::Rect(cocos2d::Vec2::ZERO, {50.F, 30.F}));
-            block->setPosition({
-                    140.F + i * (block->getContentSize().width + 2.F),
-                    getContentSize().height - 150.F - j * (block->getContentSize().height + 2.F)});
-            addChild(block);
-
-            mPhysics->registerObstacle(block);
-        }
-    }
-
-    //
+    mBlocks = makeBlocks(mPhysics, {tubeSize, headerSize + tubeSize * 2});
+    addChild(mBlocks);
 
     mPlatform = makePlatform();
     mPlatform->setPosition(getContentSize() / 2);
@@ -164,6 +150,17 @@ void ar::GameScene::addFrameShadow(const cocos2d::Vec2 &offset) {
     topShadow->setScale((getContentSize().width - offset.x) / leftShadow->getContentSize().width,
             offset.x / leftShadow->getContentSize().height);
     addChild(topShadow);
+}
+
+ar::Blocks *ar::GameScene::makeBlocks(const std::shared_ptr<Physics> &physics, const cocos2d::Vec2 &offset) {
+    auto blocks = Blocks::create(physics);
+    blocks->setCounts(cBlocksHCount, cBlocksVCount);
+    blocks->setOffset(offset);
+    blocks->setContentSize(getContentSize());
+
+    blocks->layout();
+
+    return blocks;
 }
 
 ar::Platform *ar::GameScene::makePlatform() {

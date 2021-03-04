@@ -8,9 +8,9 @@
 
 #include "Block.h"
 
-ar::Block *ar::Block::create(size_t type) {
+ar::Block *ar::Block::createWithSpriteFrameName(const std::string &name, size_t type) {
     auto block = new(std::nothrow) Block();
-    if (block && block->init(type)) {
+    if (block && block->initWithSpriteFrameName(name, type)) {
         block->autorelease();
         return block;
     }
@@ -18,8 +18,8 @@ ar::Block *ar::Block::create(size_t type) {
     return nullptr;
 }
 
-bool ar::Block::init(size_t type) {
-    if (!RectangleBody::init()) {
+bool ar::Block::initWithSpriteFrameName(const std::string &name, size_t type) {
+    if (!RectangleBody::initWithSpriteFrameName(name)) {
         return false;
     }
 

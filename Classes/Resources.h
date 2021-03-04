@@ -25,6 +25,7 @@ namespace ar {
             extern const char *ball;
             extern const char *platform;
             extern const char *platformShadow;
+            extern const char *block;
 
             extern const char *tube;
             extern const char *tubeDecor;

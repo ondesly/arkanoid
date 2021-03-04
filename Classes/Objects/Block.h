@@ -15,11 +15,11 @@ namespace ar {
     class Block : public RectangleBody {
     public:
 
-        static Block *create(size_t type);
+        static Block *createWithSpriteFrameName(const std::string &name, size_t type);
 
     public:
 
-        bool init(size_t type);
+        bool initWithSpriteFrameName(const std::string &name, size_t type);
 
         void onCollision() override;
 
