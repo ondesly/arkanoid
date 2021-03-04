@@ -27,6 +27,14 @@ namespace ar {
 
         float mHeaderSize = 0;
 
+    private:
+
+        void addHeader();
+
+        void addTop();
+
+        void addSides();
+
     };
 
 }
