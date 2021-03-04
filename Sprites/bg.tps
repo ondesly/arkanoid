@@ -60,7 +60,7 @@
             </struct>
             <struct type="AutoSDSettings">
                 <key>scale</key>
-                <double>0.25</double>
+                <double>0.5</double>
                 <key>extension</key>
                 <string>720</string>
                 <key>spriteFilter</key>
