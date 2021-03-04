@@ -18,28 +18,18 @@ ar::Platform *ar::Platform::create() {
     return nullptr;
 }
 
-bool ar::Platform::init() {
-    if (!RectangleBody::init()) {
-        return false;
-    }
-
-    scheduleUpdate();
-
-    return true;
-}
-
-void ar::Platform::update(float delta) {
-    Node::update(delta);
-
-    if ((getPosition().x == mTargetX) ||
-            (getVelocity().x > 0.F && getPosition().x > mTargetX) ||
-            (getVelocity().x < 0.F && getPosition().x < mTargetX)) {
-        setVelocity({});
-    }
-}
-
 void ar::Platform::setTargetX(float x) {
     mTargetX = x;
 
     setVelocity({mTargetX > getPosition().x ? 1.F : -1.F, 0.F});
+}
+
+void ar::Platform::setPosition(const cocos2d::Vec2 &pos) {
+    Sprite::setPosition(pos);
+
+    if ((pos.x == mTargetX) ||
+            (mVelocity.x > 0.F && pos.x > mTargetX) ||
+            (mVelocity.x < 0.F && pos.x < mTargetX)) {
+        setVelocity({});
+    }
 }

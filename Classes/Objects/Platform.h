@@ -19,9 +19,7 @@ namespace ar {
 
     public:
 
-        bool init() override;
-
-        void update(float delta) override;
+        void setPosition(const cocos2d::Vec2 &pos) override;
 
         void setTargetX(float x);
 

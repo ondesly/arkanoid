@@ -58,6 +58,8 @@ namespace ar {
 
         bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unusedEvent);
 
+        void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unusedEvent);
+
     };
 
 }

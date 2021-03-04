@@ -120,9 +120,15 @@ bool ar::GameScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unusedEv
     return true;
 }
 
+void ar::GameScene::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unusedEvent) {
+    const auto location = touch->getLocation();
+    mPlatform->setTargetX(location.x);
+}
+
 void ar::GameScene::enableTouch() {
     mTouchListener = cocos2d::EventListenerTouchOneByOne::create();
     mTouchListener->onTouchBegan = std::bind(&GameScene::onTouchBegan, this, std::placeholders::_1, std::placeholders::_2);
+    mTouchListener->onTouchMoved = std::bind(&GameScene::onTouchMoved, this, std::placeholders::_1, std::placeholders::_2);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(mTouchListener, this);
 }
 
