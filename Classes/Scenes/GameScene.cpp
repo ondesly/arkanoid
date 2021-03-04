@@ -53,11 +53,11 @@ bool ar::GameScene::init() {
 
     //
 
-    addBackground();
+    mPhysics = std::make_shared<Physics>(cPhysicsTicksPerFrame);
 
     //
 
-    mPhysics = std::make_shared<Physics>(cPhysicsTicksPerFrame);
+    addBackground();
 
     //
 
@@ -79,17 +79,15 @@ bool ar::GameScene::init() {
 
     //
 
-    addPlatform();
+    mPlatform = makePlatform();
+    mPlatform->setPosition(getContentSize() / 2);
+    addChild(mPlatform);
 
-    //
-
-    mBall = CircleBody::createWithSpriteFrameName(spriteFrame::ball);
-    mBall->setPosition({mPlatform->getPosition().x, mPlatform->getPosition().y + mPlatform->getContentSize().height / 2 + mBall->getContentSize().height / 2});
+    mBall = makeBall();
+    mBall->setPosition({
+            mPlatform->getPosition().x,
+            mPlatform->getPosition().y + mPlatform->getContentSize().height / 2 + mBall->getContentSize().height / 2});
     addChild(mBall);
-
-    mBall->setSpeed(0.5F);
-
-    mPhysics->registerAgent(mBall);
 
     //
 
@@ -146,20 +144,30 @@ void ar::GameScene::addFrame(const std::shared_ptr<Physics> &physics) {
     frame->layout();
 }
 
-void ar::GameScene::addPlatform() {
-    mPlatform = Platform::createWithSpriteFrameName(spriteFrame::platform);
-    mPlatform->setPosition(getContentSize() / 2);
-    addChild(mPlatform);
+ar::Platform *ar::GameScene::makePlatform() {
+    auto platform = Platform::createWithSpriteFrameName(spriteFrame::platform);
 
     auto shadow = cocos2d::Sprite::createWithSpriteFrameName(spriteFrame::platformShadow);
-    shadow->setPosition({mPlatform->getContentSize().width / 2 + mPlatform->getContentSize().height / 2, 0.F});
-    mPlatform->addChild(shadow, -1);
+    shadow->setPosition({platform->getContentSize().width / 2 + platform->getContentSize().height / 2, 0.F});
+    platform->addChild(shadow, -1);
 
     //
 
-    mPhysics->registerAgent(mPlatform);
-    mPhysics->registerObstacle(mPlatform);
+    mPhysics->registerAgent(platform);
+    mPhysics->registerObstacle(platform);
 
-    mPlatform->setSpeed(cPlatformSpeed);
-    mPlatform->setFriction(cPlatformFriction);
+    platform->setSpeed(cPlatformSpeed);
+    platform->setFriction(cPlatformFriction);
+
+    return platform;
+}
+
+ar::Body *ar::GameScene::makeBall() {
+    auto ball = CircleBody::createWithSpriteFrameName(spriteFrame::ball);
+
+    mPhysics->registerAgent(ball);
+
+    ball->setSpeed(mBallSpeed);
+
+    return ball;
 }

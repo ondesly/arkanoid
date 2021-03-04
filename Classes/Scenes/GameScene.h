@@ -48,13 +48,17 @@ namespace ar {
         Body *mBall;
         Platform *mPlatform;
 
+        float mBallSpeed = 0.5F;
+
     private:
 
         void addBackground();
 
         void addFrame(const std::shared_ptr<Physics> &physics);
 
-        void addPlatform();
+        Platform *makePlatform();
+
+        Body *makeBall();
 
         void enableTouch();
 
