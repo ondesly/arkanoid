@@ -71,6 +71,8 @@ namespace ar {
 
         static CircleBody *create();
 
+        static CircleBody *createWithSpriteFrameName(const std::string &name);
+
     public:
 
         bool isCollided(Body *obstacle) const override;

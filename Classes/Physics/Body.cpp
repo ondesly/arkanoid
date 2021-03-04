@@ -108,6 +108,16 @@ ar::CircleBody *ar::CircleBody::create() {
     return nullptr;
 }
 
+ar::CircleBody *ar::CircleBody::createWithSpriteFrameName(const std::string &name) {
+    auto body = new(std::nothrow) CircleBody();
+    if (body && body->initWithSpriteFrameName(name)) {
+        body->autorelease();
+        return body;
+    }
+    CC_SAFE_DELETE(body);
+    return nullptr;
+}
+
 bool ar::CircleBody::isCollided(ar::Body *obstacle) const {
     const auto &pos = getPosition();
     const auto rect = obstacle->getVisibleRect();

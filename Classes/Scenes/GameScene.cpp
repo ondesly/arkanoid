@@ -20,7 +20,12 @@
 
 namespace {
 
-    const char *cBgTextureName = "bg";
+    namespace spriteFrame {
+
+        const char *bg = "bg";
+        const char *ball = "ball";
+
+    }
 
     const size_t cPhysicsTicksPerFrame = 10;
 
@@ -82,8 +87,7 @@ bool ar::GameScene::init() {
 
     //
 
-    mBall = CircleBody::create();
-    mBall->setTextureRect(cocos2d::Rect(cocos2d::Vec2::ZERO, {10.F, 10.F}));
+    mBall = CircleBody::createWithSpriteFrameName(spriteFrame::ball);
     mBall->setPosition({mPlatform->getPosition().x, mPlatform->getPosition().y + mPlatform->getContentSize().height / 2 + mBall->getContentSize().height / 2});
     addChild(mBall);
 
@@ -123,7 +127,7 @@ void ar::GameScene::enableTouch() {
 }
 
 void ar::GameScene::addBackground() {
-    auto bg = cocos2d::Sprite::createWithSpriteFrameName(cBgTextureName);
+    auto bg = cocos2d::Sprite::createWithSpriteFrameName(spriteFrame::bg);
     bg->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
     bg->setTextureRect(cocos2d::Rect({}, getContentSize()));
     addChild(bg);
