@@ -57,12 +57,13 @@ bool ar::GameScene::init() {
     const auto headerSize = getContentSize().width / 10.F;
     const auto tubeSize = cocos2d::SpriteFrameCache::getInstance()->
             getSpriteFrameByName(texture::game::tube)->getOriginalSize().height;
+    const auto blockSize = (getContentSize().width - tubeSize * 2) / cBlocksHCount;
 
-    addFrameShadow({tubeSize, tubeSize + headerSize});
+    addFrameShadow(blockSize / 2, {tubeSize, tubeSize + headerSize});
 
     //
 
-    mBlocks = makeBlocks(mPhysics, {tubeSize, headerSize + tubeSize * 4});
+    mBlocks = makeBlocks(mPhysics, blockSize, {tubeSize, headerSize + tubeSize * 4});
     addChild(mBlocks);
 
     mPlatform = makePlatform();
@@ -130,13 +131,13 @@ void ar::GameScene::addFrame(const std::shared_ptr<Physics> &physics, float head
     frame->layout();
 }
 
-void ar::GameScene::addFrameShadow(const cocos2d::Vec2 &offset) {
+void ar::GameScene::addFrameShadow(float size, const cocos2d::Vec2 &offset) {
     auto leftShadow = cocos2d::Sprite::createWithSpriteFrameName(texture::game::empty);
     leftShadow->setColor(cocos2d::Color3B::BLACK);
     leftShadow->setOpacity(cShadowOpacity);
     leftShadow->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
     leftShadow->setPosition({offset.x, 0.F});
-    leftShadow->setScale(offset.x / leftShadow->getContentSize().width,
+    leftShadow->setScale(size / leftShadow->getContentSize().width,
             (getContentSize().height - offset.y) / leftShadow->getContentSize().height);
     addChild(leftShadow);
 
@@ -144,16 +145,17 @@ void ar::GameScene::addFrameShadow(const cocos2d::Vec2 &offset) {
     topShadow->setColor(cocos2d::Color3B::BLACK);
     topShadow->setOpacity(cShadowOpacity);
     topShadow->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_LEFT);
-    topShadow->setPosition({offset.x * 2, getContentSize().height - offset.y});
-    topShadow->setScale((getContentSize().width - offset.x) / leftShadow->getContentSize().width,
-            offset.x / leftShadow->getContentSize().height);
+    topShadow->setPosition({offset.x + size, getContentSize().height - offset.y});
+    topShadow->setScale((getContentSize().width - offset.x - size) / leftShadow->getContentSize().width,
+            size / leftShadow->getContentSize().height);
     addChild(topShadow);
 }
 
-ar::Blocks *ar::GameScene::makeBlocks(const std::shared_ptr<Physics> &physics, const cocos2d::Vec2 &offset) {
+ar::Blocks *ar::GameScene::makeBlocks(const std::shared_ptr<Physics> &physics, float blockSize, const cocos2d::Vec2 &offset) {
     auto blocks = Blocks::create(physics);
     blocks->setCounts(cBlocksHCount, cBlocksVCount);
     blocks->setOffset(offset);
+    blocks->setBlocksSize(blockSize);
     blocks->setContentSize(getContentSize());
 
     blocks->layout();

@@ -27,13 +27,16 @@ namespace ar {
 
         void setOffset(const cocos2d::Vec2 &offset);
 
+        void setBlocksSize(float blockSize);
+
         void layout();
 
     private:
 
-        size_t mHCount;
-        size_t mVCount;
+        size_t mHCount = 0;
+        size_t mVCount = 0;
         cocos2d::Vec2 mOffset;
+        float mBlockSize = 0;
 
         std::shared_ptr<Physics> mPhysics;
 
