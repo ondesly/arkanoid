@@ -26,8 +26,10 @@ cocos2d::Rect ar::Body::getVisibleRect() {
 }
 
 void ar::Body::updatePosition() {
-    setPosition(getPosition() + mVelocity * mSpeed);
-    mIsVisibleRectDirty = true;
+    if (!mVelocity.isZero()) {
+        setPosition(getPosition() + mVelocity * mSpeed);
+        mIsVisibleRectDirty = true;
+    }
 }
 
 void ar::Body::updateVelocityAfterCollision(ar::Body *obstacle) {

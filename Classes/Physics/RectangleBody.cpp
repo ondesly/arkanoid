@@ -29,17 +29,17 @@ ar::RectangleBody *ar::RectangleBody::createWithSpriteFrameName(const std::strin
 }
 
 bool ar::RectangleBody::isCollided(ar::Body *obstacle) {
-    const auto rect = getVisibleRect();
-    const auto obRect = obstacle->getVisibleRect();
+    const auto &rect = getVisibleRect();
+    const auto &obRect = obstacle->getVisibleRect();
 
     return rect.size.width >= obRect.origin.x && rect.origin.x <= obRect.size.width &&
             rect.size.height >= obRect.origin.y && rect.origin.y <= obRect.size.height;
 }
 
 cocos2d::Vec2 ar::RectangleBody::getVelocityAfterCollision(ar::Body *obstacle) {
-    const auto pos = getPosition();
+    const auto &pos = getPosition();
     const auto &velocity = getVelocity();
-    const auto rect = obstacle->getVisibleRect();
+    const auto &rect = obstacle->getVisibleRect();
 
     auto result = velocity;
 

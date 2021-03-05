@@ -30,7 +30,7 @@ ar::CircleBody *ar::CircleBody::createWithSpriteFrameName(const std::string &nam
 
 bool ar::CircleBody::isCollided(ar::Body *obstacle) {
     const auto &pos = getPosition();
-    const auto rect = obstacle->getVisibleRect();
+    const auto &rect = obstacle->getVisibleRect();
 
     const cocos2d::Vec2 nearest{
             std::max(std::min(pos.x, rect.size.width), rect.origin.x),
@@ -43,7 +43,7 @@ bool ar::CircleBody::isCollided(ar::Body *obstacle) {
 cocos2d::Vec2 ar::CircleBody::getVelocityAfterCollision(ar::Body *obstacle) {
     const auto &pos = getPosition();
     const auto &velocity = getVelocity();
-    const auto rect = obstacle->getVisibleRect();
+    const auto &rect = obstacle->getVisibleRect();
 
     auto result = velocity;
 
