@@ -40,7 +40,8 @@ namespace {
 
         int background = 0;
         int shadow = 0;
-        int frame = 2;
+        int blocks = 2;
+        int frame = blocks + 1;
         int header = frame + 1;
         int dialog = header + 1;
 
@@ -93,34 +94,38 @@ bool ar::GameScene::init() {
 
     //
 
-    const auto blockSize = (getContentSize().width - frame->getBorder() * 2) / cBlocksHCount;
+    mBlocks = Blocks::create(mPhysics);
+    mBlocks->setCounts(cBlocksHCount, cBlocksVCount);
+    mBlocks->setBlockSize(gameArea.size.width / cBlocksHCount);
+    mBlocks->setOffset({gameArea.origin.x, mHeader->getContentSize().height + frame->getBorder() * 4});
+    mBlocks->setContentSize(getContentSize());
+    addChild(mBlocks, z_order::blocks);
 
-    auto leftShadow = makeShadow({blockSize / 2, gameArea.size.height});
+    //
+
+    auto leftShadow = makeShadow({mBlocks->getBlockSize() / 2, gameArea.size.height});
     leftShadow->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
     leftShadow->setPosition(gameArea.origin);
     addChild(leftShadow, z_order::shadow);
 
-    auto topShadow = makeShadow({gameArea.size.width - blockSize / 2, blockSize / 2});
+    auto topShadow = makeShadow({gameArea.size.width - mBlocks->getBlockSize() / 2, mBlocks->getBlockSize() / 2});
     topShadow->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_LEFT);
-    topShadow->setPosition({gameArea.origin.x + blockSize / 2, gameArea.size.height});
+    topShadow->setPosition({gameArea.origin.x + mBlocks->getBlockSize() / 2, gameArea.size.height});
     addChild(topShadow, z_order::shadow);
 
     //
-
-    mHeaderSize = getContentSize().width * 0.2F;
-    mFrameSize = cocos2d::SpriteFrameCache::getInstance()->
-            getSpriteFrameByName(texture::game::tube)->getOriginalSize().height;
-
-    //
-
-    mBlocks = makeBlocks(mPhysics, blockSize, {mFrameSize, mHeaderSize + mFrameSize * 4});
-    addChild(mBlocks);
 
     mPlatform = makePlatform();
     addChild(mPlatform);
 
     mBall = makeBall();
     addChild(mBall);
+
+    //
+
+    mHeaderSize = getContentSize().width * 0.2F;
+    mFrameSize = cocos2d::SpriteFrameCache::getInstance()->
+            getSpriteFrameByName(texture::game::tube)->getOriginalSize().height;
 
     //
 
@@ -223,18 +228,6 @@ cocos2d::Sprite *ar::GameScene::makeShadow(const cocos2d::Size &size) const {
     shadow->setScale(size.width / shadow->getContentSize().width, size.height / shadow->getContentSize().height);
 
     return shadow;
-}
-
-ar::Blocks *ar::GameScene::makeBlocks(const std::shared_ptr<Physics> &physics, float blockSize, const cocos2d::Vec2 &offset) {
-    auto blocks = Blocks::create(physics);
-    blocks->setCounts(cBlocksHCount, cBlocksVCount);
-    blocks->setOffset(offset);
-    blocks->setBlocksSize(blockSize);
-    blocks->setContentSize(getContentSize());
-
-    blocks->layout();
-
-    return blocks;
 }
 
 ar::Platform *ar::GameScene::makePlatform() {

@@ -39,7 +39,11 @@ void ar::Blocks::setOffset(const cocos2d::Vec2 &offset) {
     mOffset = offset;
 }
 
-void ar::Blocks::setBlocksSize(float blockSize) {
+float ar::Blocks::getBlockSize() const {
+    return mBlockSize;
+}
+
+void ar::Blocks::setBlockSize(float blockSize) {
     mBlockSize = blockSize;
 }
 
@@ -66,4 +70,10 @@ void ar::Blocks::reset() {
     for (auto block : mBlocks) {
         block->setType(distrib(gen));
     }
+}
+
+void ar::Blocks::setContentSize(const cocos2d::Size &contentSize) {
+    Node::setContentSize(contentSize);
+
+    layout();
 }

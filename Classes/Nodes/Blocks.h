@@ -26,13 +26,15 @@ namespace ar {
 
     public:
 
+        void setContentSize(const cocos2d::Size &contentSize) override;
+
         void setCounts(size_t h, size_t v);
 
         void setOffset(const cocos2d::Vec2 &offset);
 
-        void setBlocksSize(float blockSize);
+        float getBlockSize() const;
 
-        void layout();
+        void setBlockSize(float blockSize);
 
         void reset();
 
@@ -50,6 +52,10 @@ namespace ar {
     private:
 
         Blocks(const std::shared_ptr<Physics> &physics);
+
+    private:
+
+        void layout();
 
     };
 

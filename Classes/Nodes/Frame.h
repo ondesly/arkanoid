@@ -25,8 +25,6 @@ namespace ar {
 
         void setContentSize(const cocos2d::Size &contentSize) override;
 
-        void layout();
-
         float getBorder() const;
 
     private:
@@ -40,6 +38,8 @@ namespace ar {
         Frame(const std::shared_ptr<Physics> &physics);
 
     private:
+
+        void layout();
 
         void addTop();
 

@@ -71,8 +71,6 @@ namespace ar {
 
         cocos2d::Sprite *makeShadow(const cocos2d::Size &size) const;
 
-        Blocks *makeBlocks(const std::shared_ptr<Physics> &physics, float blockSize, const cocos2d::Vec2 &offset);
-
         Platform *makePlatform();
 
         Ball *makeBall();
