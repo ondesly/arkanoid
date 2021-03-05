@@ -38,6 +38,7 @@ namespace {
 
     namespace z_order {
 
+        int background = 0;
         int frame = 2;
         int header = frame + 1;
         int dialog = header + 1;
@@ -67,6 +68,11 @@ bool ar::GameScene::init() {
 
     //
 
+    auto bg = makeBackground();
+    addChild(bg, z_order::background);
+
+    //
+
     mHeader = Header::create({getContentSize().width, getContentSize().width * 0.2F});
     mHeader->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_LEFT);
     mHeader->setPosition({0.F, getContentSize().height});
@@ -77,10 +83,6 @@ bool ar::GameScene::init() {
     auto frame = Frame::create(mPhysics);
     frame->setContentSize({getContentSize().width, getContentSize().height - mHeader->getContentSize().height});
     addChild(frame, z_order::frame);
-
-    //
-
-    addBackground();
 
     //
 
@@ -187,13 +189,13 @@ std::shared_ptr<ar::Physics> ar::GameScene::makePhysics() const {
     return std::make_shared<Physics>(ballWidth * cPhysicsTicksPerPixel);
 }
 
-void ar::GameScene::addBackground() {
+cocos2d::Sprite *ar::GameScene::makeBackground() const {
     auto bg = cocos2d::Sprite::createWithSpriteFrameName(texture::bg::bg);
     bg->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
-    bg->setTextureRect(cocos2d::Rect({}, getContentSize()));
-    addChild(bg);
-
+    bg->setTextureRect({{}, getContentSize()});
     bg->getTexture()->setTexParameters({GL_NEAREST, GL_NEAREST, GL_REPEAT, GL_REPEAT});
+
+    return bg;
 }
 
 void ar::GameScene::addFrameShadow(float size, const cocos2d::Vec2 &offset) {

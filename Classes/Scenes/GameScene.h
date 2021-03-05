@@ -19,6 +19,8 @@ namespace cocos2d {
 
     class EventListenerTouchOneByOne;
 
+    class Sprite;
+
     class Touch;
 
 }
@@ -65,7 +67,7 @@ namespace ar {
 
         std::shared_ptr<Physics> makePhysics() const;
 
-        void addBackground();
+        cocos2d::Sprite *makeBackground() const;
 
         void addFrameShadow(float size, const cocos2d::Vec2 &offset);
 
