@@ -60,8 +60,7 @@ namespace ar {
         size_t mScore = 0;
         size_t mDestroyedBlocksCount = 0;
 
-        float mHeaderSize = 0;
-        float mFrameSize = 0;
+        cocos2d::Rect mGameArea;
 
     private:
 

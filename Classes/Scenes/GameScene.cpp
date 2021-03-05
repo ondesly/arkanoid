@@ -88,7 +88,7 @@ bool ar::GameScene::init() {
 
     //
 
-    const cocos2d::Rect gameArea{
+    mGameArea = {
             frame->getBorder(), 0.F,
             frame->getContentSize().width - frame->getBorder() * 2, frame->getContentSize().height - frame->getBorder()};
 
@@ -96,21 +96,21 @@ bool ar::GameScene::init() {
 
     mBlocks = Blocks::create(mPhysics);
     mBlocks->setCounts(cBlocksHCount, cBlocksVCount);
-    mBlocks->setBlockSize(gameArea.size.width / cBlocksHCount);
-    mBlocks->setOffset({gameArea.origin.x, mHeader->getContentSize().height + frame->getBorder() * 4});
+    mBlocks->setBlockSize(mGameArea.size.width / cBlocksHCount);
+    mBlocks->setOffset({mGameArea.origin.x, mHeader->getContentSize().height + frame->getBorder() * 4});
     mBlocks->setContentSize(getContentSize());
     addChild(mBlocks, z_order::blocks);
 
     //
 
-    auto leftShadow = makeShadow({mBlocks->getBlockSize() / 2, gameArea.size.height});
+    auto leftShadow = makeShadow({mBlocks->getBlockSize() / 2, mGameArea.size.height});
     leftShadow->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
-    leftShadow->setPosition(gameArea.origin);
+    leftShadow->setPosition(mGameArea.origin);
     addChild(leftShadow, z_order::shadow);
 
-    auto topShadow = makeShadow({gameArea.size.width - mBlocks->getBlockSize() / 2, mBlocks->getBlockSize() / 2});
+    auto topShadow = makeShadow({mGameArea.size.width - mBlocks->getBlockSize() / 2, mBlocks->getBlockSize() / 2});
     topShadow->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_LEFT);
-    topShadow->setPosition({gameArea.origin.x + mBlocks->getBlockSize() / 2, gameArea.size.height});
+    topShadow->setPosition({mGameArea.origin.x + mBlocks->getBlockSize() / 2, mGameArea.size.height});
     addChild(topShadow, z_order::shadow);
 
     //
@@ -120,12 +120,6 @@ bool ar::GameScene::init() {
 
     mBall = makeBall();
     addChild(mBall);
-
-    //
-
-    mHeaderSize = getContentSize().width * 0.2F;
-    mFrameSize = cocos2d::SpriteFrameCache::getInstance()->
-            getSpriteFrameByName(texture::game::tube)->getOriginalSize().height;
 
     //
 
@@ -147,11 +141,9 @@ void ar::GameScene::startGame() {
 
     //
 
-    const auto platformY = getContentSize().height - mHeaderSize - mFrameSize - (getContentSize().width - mFrameSize * 2);
-
     mPlatform->setVisible(true);
     mPlatform->setVelocity({});
-    mPlatform->setPosition({getContentSize().width / 2, platformY});
+    mPlatform->setPosition({getContentSize().width / 2, mGameArea.size.height - mGameArea.size.width});
 
     mBall->setVisible(true);
     mBall->setVelocity({});
@@ -288,9 +280,7 @@ void ar::GameScene::addListeners() {
 }
 
 void ar::GameScene::showDialog(const std::string &title) {
-    const cocos2d::Size size{getContentSize().width - mFrameSize * 2, getContentSize().height - mHeaderSize - mFrameSize};
-
-    auto dialog = Dialog::create(size, title, std::to_string(mScore), [&](Dialog *dialog) {
+    auto dialog = Dialog::create(mGameArea.size, title, std::to_string(mScore), [&](Dialog *dialog) {
         dialog->removeFromParent();
 
         startGame();
