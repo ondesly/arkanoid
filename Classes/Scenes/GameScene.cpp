@@ -36,6 +36,14 @@ namespace {
     const char *cGameComplete = "GAME COMPLETE";
     const char *cGameOver = "GAME OVER";
 
+    namespace z_order {
+
+        int frame = 2;
+        int header = frame + 1;
+        int dialog = header + 1;
+
+    }
+
 }
 
 ar::GameScene *ar::GameScene::create() {
@@ -63,6 +71,19 @@ bool ar::GameScene::init() {
 
     //
 
+    mHeader = Header::create({getContentSize().width, getContentSize().width * 0.2F});
+    mHeader->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_LEFT);
+    mHeader->setPosition({0.F, getContentSize().height});
+    addChild(mHeader, z_order::header);
+
+    //
+
+    auto frame = Frame::create(mPhysics);
+    frame->setContentSize({getContentSize().width, getContentSize().height - mHeader->getContentSize().height});
+    addChild(frame, z_order::frame);
+
+    //
+
     addBackground();
 
     //
@@ -84,14 +105,6 @@ bool ar::GameScene::init() {
 
     mBall = makeBall();
     addChild(mBall);
-
-    //
-
-    addFrame(mPhysics, mHeaderSize);
-
-    mHeader = makeHeader(mHeaderSize);
-    mHeader->setPosition({0.F, getContentSize().height});
-    addChild(mHeader);
 
     //
 
@@ -180,15 +193,6 @@ void ar::GameScene::addBackground() {
     bg->getTexture()->setTexParameters({GL_NEAREST, GL_NEAREST, GL_REPEAT, GL_REPEAT});
 }
 
-void ar::GameScene::addFrame(const std::shared_ptr<Physics> &physics, float headerSize) {
-    auto frame = Frame::create(physics);
-    frame->setHeaderSize(headerSize);
-    frame->setContentSize(getContentSize());
-    addChild(frame);
-
-    frame->layout();
-}
-
 void ar::GameScene::addFrameShadow(float size, const cocos2d::Vec2 &offset) {
     auto leftShadow = cocos2d::Sprite::createWithSpriteFrameName(texture::game::empty);
     leftShadow->setColor(cocos2d::Color3B::BLACK);
@@ -207,13 +211,6 @@ void ar::GameScene::addFrameShadow(float size, const cocos2d::Vec2 &offset) {
     topShadow->setScale((getContentSize().width - offset.x - size) / leftShadow->getContentSize().width,
             size / leftShadow->getContentSize().height);
     addChild(topShadow);
-}
-
-ar::Header *ar::GameScene::makeHeader(float headerSize) {
-    auto header = Header::create({getContentSize().width, headerSize});
-    header->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_LEFT);
-
-    return header;
 }
 
 ar::Blocks *ar::GameScene::makeBlocks(const std::shared_ptr<Physics> &physics, float blockSize, const cocos2d::Vec2 &offset) {
@@ -294,5 +291,5 @@ void ar::GameScene::showDialog(const std::string &title) {
         startGame();
     });
     dialog->setPosition({getContentSize().width / 2, 0.F});
-    addChild(dialog);
+    addChild(dialog, z_order::dialog);
 }

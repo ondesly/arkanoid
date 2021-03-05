@@ -30,8 +30,10 @@ ar::Frame::Frame(const std::shared_ptr<Physics> &physics) : mPhysics(physics) {
 
 }
 
-void ar::Frame::setHeaderSize(float size) {
-    mHeaderSize = size;
+void ar::Frame::setContentSize(const cocos2d::Size &contentSize) {
+    Node::setContentSize(contentSize);
+
+    layout();
 }
 
 void ar::Frame::layout() {
@@ -50,13 +52,13 @@ void ar::Frame::addTop() {
 
     auto cornerLeft = RectangleBody::createWithSpriteFrameName(texture::game::tubeCornerLeft);
     cornerLeft->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_LEFT);
-    cornerLeft->setPosition({0.F, getContentSize().height - mHeaderSize});
+    cornerLeft->setPosition({0.F, getContentSize().height});
     addChild(cornerLeft);
     mPhysics->registerObstacle(cornerLeft);
 
     auto cornerRight = RectangleBody::createWithSpriteFrameName(texture::game::tubeCornerRight);
     cornerRight->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_RIGHT);
-    cornerRight->setPosition({getContentSize().width, getContentSize().height - mHeaderSize});
+    cornerRight->setPosition({getContentSize().width, getContentSize().height});
     addChild(cornerRight);
     mPhysics->registerObstacle(cornerRight);
 
@@ -64,21 +66,21 @@ void ar::Frame::addTop() {
 
     auto tubeHLeft = RectangleBody::createWithSpriteFrameName(texture::game::tube);
     tubeHLeft->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_LEFT);
-    tubeHLeft->setPosition({cornerWidth, getContentSize().height - mHeaderSize});
+    tubeHLeft->setPosition({cornerWidth, getContentSize().height});
     tubeHLeft->setScaleX(segmentSize / tubeHLeft->getContentSize().width);
     addChild(tubeHLeft);
     mPhysics->registerObstacle(tubeHLeft);
 
     auto tubeHCenter = RectangleBody::createWithSpriteFrameName(texture::game::tube);
     tubeHCenter->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_TOP);
-    tubeHCenter->setPosition({getContentSize().width / 2, getContentSize().height - mHeaderSize});
+    tubeHCenter->setPosition({getContentSize().width / 2, getContentSize().height});
     tubeHCenter->setScaleX(segmentSize * 2 / tubeHCenter->getContentSize().width);
     addChild(tubeHCenter);
     mPhysics->registerObstacle(tubeHCenter);
 
     auto tubeHRight = RectangleBody::createWithSpriteFrameName(texture::game::tube);
     tubeHRight->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_RIGHT);
-    tubeHRight->setPosition({getContentSize().width - cornerWidth, getContentSize().height - mHeaderSize});
+    tubeHRight->setPosition({getContentSize().width - cornerWidth, getContentSize().height});
     tubeHRight->setScaleX(segmentSize / tubeHRight->getContentSize().width);
     addChild(tubeHRight);
     mPhysics->registerObstacle(tubeHRight);
@@ -87,13 +89,13 @@ void ar::Frame::addTop() {
 
     auto decorLeft = RectangleBody::createWithSpriteFrameName(texture::game::tubeDecor);
     decorLeft->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_LEFT);
-    decorLeft->setPosition({cornerWidth + segmentSize, getContentSize().height - mHeaderSize});
+    decorLeft->setPosition({cornerWidth + segmentSize, getContentSize().height});
     addChild(decorLeft);
     mPhysics->registerObstacle(decorLeft);
 
     auto decorRight = RectangleBody::createWithSpriteFrameName(texture::game::tubeDecor);
     decorRight->setAnchorPoint(cocos2d::Vec2::ANCHOR_TOP_RIGHT);
-    decorRight->setPosition({getContentSize().width - segmentSize - cornerWidth, getContentSize().height - mHeaderSize});
+    decorRight->setPosition({getContentSize().width - segmentSize - cornerWidth, getContentSize().height});
     addChild(decorRight);
     mPhysics->registerObstacle(decorRight);
 }
@@ -102,7 +104,7 @@ void ar::Frame::addSides() {
     auto cornerFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(texture::game::tubeCornerLeft);
     auto decorFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(texture::game::tubeDecor);
 
-    const auto top = getContentSize().height - mHeaderSize - cornerFrame->getOriginalSize().height;
+    const auto top = getContentSize().height - cornerFrame->getOriginalSize().height;
     const auto segmentSize = decorFrame->getOriginalSize().width;
     const auto segmentsCount = size_t(std::ceil(top / segmentSize));
 

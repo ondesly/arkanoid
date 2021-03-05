@@ -23,13 +23,11 @@ namespace ar {
 
     public:
 
-        void setHeaderSize(float size);
+        void setContentSize(const cocos2d::Size &contentSize) override;
 
         void layout();
 
     private:
-
-        float mHeaderSize = 0;
 
         std::shared_ptr<Physics> mPhysics;
 
@@ -38,8 +36,6 @@ namespace ar {
         Frame(const std::shared_ptr<Physics> &physics);
 
     private:
-
-        void addHeader();
 
         void addTop();
 
