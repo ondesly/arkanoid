@@ -48,6 +48,8 @@ void ar::Frame::addTop() {
     const auto cornerWidth = cornerFrame->getOriginalSize().width;
     const auto segmentSize = (getContentSize().width - cornerWidth * 2 - decorFrame->getOriginalSize().width * 2) / 4;
 
+    mBorder = cornerWidth;
+
     // Corners
 
     auto cornerLeft = RectangleBody::createWithSpriteFrameName(texture::game::tubeCornerLeft);
@@ -134,4 +136,8 @@ void ar::Frame::addSides() {
         addChild(right);
         mPhysics->registerObstacle(right);
     }
+}
+
+float ar::Frame::getBorder() const {
+    return mBorder;
 }

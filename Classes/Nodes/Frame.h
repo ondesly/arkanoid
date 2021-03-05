@@ -27,9 +27,13 @@ namespace ar {
 
         void layout();
 
+        float getBorder() const;
+
     private:
 
         std::shared_ptr<Physics> mPhysics;
+
+        float mBorder = 0;
 
     private:
 
