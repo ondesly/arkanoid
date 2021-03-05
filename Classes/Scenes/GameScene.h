@@ -66,6 +66,8 @@ namespace ar {
 
         std::shared_ptr<Physics> makePhysics() const;
 
+        void addUI();
+
         cocos2d::Sprite *makeBackground() const;
 
         cocos2d::Sprite *makeShadow(const cocos2d::Size &size) const;

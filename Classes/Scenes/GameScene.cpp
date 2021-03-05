@@ -70,8 +70,66 @@ bool ar::GameScene::init() {
 
     mPhysics = makePhysics();
 
+    addUI();
+    addListeners();
+
+    enableTouch();
+
     //
 
+    startGame();
+
+    //
+
+    return true;
+}
+
+void ar::GameScene::startGame() {
+    mScore = 0;
+    mDestroyedBlocksCount = 0;
+
+    //
+
+    mPlatform->setVisible(true);
+    mPlatform->setVelocity({});
+    mPlatform->setPosition({getContentSize().width / 2, mGameArea.size.height - mGameArea.size.width});
+
+    mBall->setVisible(true);
+    mBall->setVelocity({});
+    mBall->setPosition({
+            mPlatform->getPosition().x,
+            mPlatform->getPosition().y + mPlatform->getContentSize().height / 2 + mBall->getContentSize().height / 2});
+
+    //
+
+    mBlocks->reset();
+
+    //
+
+    mTouchListener->setEnabled(true);
+}
+
+void ar::GameScene::endGame() {
+    mBall->setVisible(false);
+    mPlatform->setVisible(false);
+
+    //
+
+    mHeader->setScore(0);
+
+    //
+
+    mTouchListener->setEnabled(false);
+}
+
+std::shared_ptr<ar::Physics> ar::GameScene::makePhysics() const {
+    auto ballFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(texture::game::ball);
+    const auto ballWidth = ballFrame->getOriginalSize().width;
+
+    return std::make_shared<Physics>(ballWidth * cPhysicsTicksPerPixel);
+}
+
+void ar::GameScene::addUI() {
     auto bg = makeBackground();
     addChild(bg, z_order::background);
 
@@ -122,57 +180,6 @@ bool ar::GameScene::init() {
 
     mBall = makeBall();
     addChild(mBall, z_order::ball);
-
-    //
-
-    addListeners();
-    enableTouch();
-
-    //
-
-    startGame();
-
-    //
-
-    return true;
-}
-
-void ar::GameScene::startGame() {
-    mScore = 0;
-    mDestroyedBlocksCount = 0;
-
-    //
-
-    mPlatform->setVisible(true);
-    mPlatform->setVelocity({});
-    mPlatform->setPosition({getContentSize().width / 2, mGameArea.size.height - mGameArea.size.width});
-
-    mBall->setVisible(true);
-    mBall->setVelocity({});
-    mBall->setPosition({
-            mPlatform->getPosition().x,
-            mPlatform->getPosition().y + mPlatform->getContentSize().height / 2 + mBall->getContentSize().height / 2});
-
-    //
-
-    mBlocks->reset();
-
-    //
-
-    mTouchListener->setEnabled(true);
-}
-
-void ar::GameScene::endGame() {
-    mBall->setVisible(false);
-    mPlatform->setVisible(false);
-
-    //
-
-    mHeader->setScore(0);
-
-    //
-
-    mTouchListener->setEnabled(false);
 }
 
 bool ar::GameScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unusedEvent) {
@@ -197,13 +204,6 @@ void ar::GameScene::enableTouch() {
     mTouchListener->onTouchBegan = std::bind(&GameScene::onTouchBegan, this, std::placeholders::_1, std::placeholders::_2);
     mTouchListener->onTouchMoved = std::bind(&GameScene::onTouchMoved, this, std::placeholders::_1, std::placeholders::_2);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(mTouchListener, this);
-}
-
-std::shared_ptr<ar::Physics> ar::GameScene::makePhysics() const {
-    auto ballFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(texture::game::ball);
-    const auto ballWidth = ballFrame->getOriginalSize().width;
-
-    return std::make_shared<Physics>(ballWidth * cPhysicsTicksPerPixel);
 }
 
 cocos2d::Sprite *ar::GameScene::makeBackground() const {
