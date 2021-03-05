@@ -28,7 +28,7 @@ ar::RectangleBody *ar::RectangleBody::createWithSpriteFrameName(const std::strin
     return nullptr;
 }
 
-bool ar::RectangleBody::isCollided(ar::Body *obstacle) const {
+bool ar::RectangleBody::isCollided(ar::Body *obstacle) {
     const auto rect = getVisibleRect();
     const auto obRect = obstacle->getVisibleRect();
 
@@ -36,7 +36,7 @@ bool ar::RectangleBody::isCollided(ar::Body *obstacle) const {
             rect.size.height >= obRect.origin.y && rect.origin.y <= obRect.size.height;
 }
 
-cocos2d::Vec2 ar::RectangleBody::getVelocityAfterCollision(ar::Body *obstacle) const {
+cocos2d::Vec2 ar::RectangleBody::getVelocityAfterCollision(ar::Body *obstacle) {
     const auto pos = getPosition();
     const auto &velocity = getVelocity();
     const auto rect = obstacle->getVisibleRect();

@@ -8,20 +8,26 @@
 
 #include "Body.h"
 
-cocos2d::Rect ar::Body::getVisibleRect() const {
-    const auto &transform = getNodeToParentTransform();
+cocos2d::Rect ar::Body::getVisibleRect() {
+    if (mIsVisibleRectDirty) {
+        const auto &transform = getNodeToParentTransform();
 
-    cocos2d::Vec3 p0;
-    transform.transformPoint(&p0);
+        cocos2d::Vec3 p0;
+        transform.transformPoint(&p0);
 
-    cocos2d::Vec3 p1{getContentSize().width, getContentSize().height, 0.F};
-    transform.transformPoint(&p1);
+        cocos2d::Vec3 p1{getContentSize().width, getContentSize().height, 0.F};
+        transform.transformPoint(&p1);
 
-    return {std::min(p0.x, p1.x), std::min(p0.y, p1.y), std::max(p0.x, p1.x), std::max(p0.y, p1.y)};
+        mVisibleRect = {std::min(p0.x, p1.x), std::min(p0.y, p1.y), std::max(p0.x, p1.x), std::max(p0.y, p1.y)};
+        mIsVisibleRectDirty = false;
+    }
+
+    return mVisibleRect;
 }
 
 void ar::Body::updatePosition() {
     setPosition(getPosition() + mVelocity * mSpeed);
+    mIsVisibleRectDirty = true;
 }
 
 void ar::Body::updateVelocityAfterCollision(ar::Body *obstacle) {

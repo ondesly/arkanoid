@@ -23,9 +23,9 @@ namespace ar {
 
     public:
 
-        bool isCollided(Body *obstacle) const override;
+        bool isCollided(Body *obstacle) override;
 
-        cocos2d::Vec2 getVelocityAfterCollision(Body *obstacle) const override;
+        cocos2d::Vec2 getVelocityAfterCollision(Body *obstacle) override;
 
     };
 

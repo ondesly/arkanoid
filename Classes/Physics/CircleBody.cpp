@@ -28,7 +28,7 @@ ar::CircleBody *ar::CircleBody::createWithSpriteFrameName(const std::string &nam
     return nullptr;
 }
 
-bool ar::CircleBody::isCollided(ar::Body *obstacle) const {
+bool ar::CircleBody::isCollided(ar::Body *obstacle) {
     const auto &pos = getPosition();
     const auto rect = obstacle->getVisibleRect();
 
@@ -40,7 +40,7 @@ bool ar::CircleBody::isCollided(ar::Body *obstacle) const {
     return distance <= getContentSize().width / 2;
 }
 
-cocos2d::Vec2 ar::CircleBody::getVelocityAfterCollision(ar::Body *obstacle) const {
+cocos2d::Vec2 ar::CircleBody::getVelocityAfterCollision(ar::Body *obstacle) {
     const auto &pos = getPosition();
     const auto &velocity = getVelocity();
     const auto rect = obstacle->getVisibleRect();

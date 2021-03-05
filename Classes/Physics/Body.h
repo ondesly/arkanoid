@@ -15,15 +15,15 @@ namespace ar {
     class Body : public cocos2d::Sprite {
     public:
 
-        virtual bool isCollided(Body *obstacle) const = 0;
+        virtual bool isCollided(Body *obstacle) = 0;
 
-        virtual cocos2d::Vec2 getVelocityAfterCollision(Body *obstacle) const = 0;
+        virtual cocos2d::Vec2 getVelocityAfterCollision(Body *obstacle) = 0;
 
         virtual void onCollision();
 
     public:
 
-        cocos2d::Rect getVisibleRect() const;
+        cocos2d::Rect getVisibleRect();
 
         void updatePosition();
 
@@ -46,6 +46,9 @@ namespace ar {
         float mSpeed = 0.F;
         cocos2d::Vec2 mVelocity;
         float mFriction = 0.F;
+
+        bool mIsVisibleRectDirty = true;
+        cocos2d::Rect mVisibleRect;
 
     };
 
