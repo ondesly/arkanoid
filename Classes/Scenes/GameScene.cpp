@@ -63,11 +63,7 @@ bool ar::GameScene::init() {
 
     //
 
-    const auto ballWidth = cocos2d::SpriteFrameCache::getInstance()->
-            getSpriteFrameByName(texture::game::ball)->getOriginalSize().width;
-
-    const auto physicsTicksPerFrame = size_t(ballWidth) * cPhysicsTicksPerPixel;
-    mPhysics = std::make_shared<Physics>(physicsTicksPerFrame);
+    mPhysics = makePhysics();
 
     //
 
@@ -182,6 +178,13 @@ void ar::GameScene::enableTouch() {
     mTouchListener->onTouchBegan = std::bind(&GameScene::onTouchBegan, this, std::placeholders::_1, std::placeholders::_2);
     mTouchListener->onTouchMoved = std::bind(&GameScene::onTouchMoved, this, std::placeholders::_1, std::placeholders::_2);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(mTouchListener, this);
+}
+
+std::shared_ptr<ar::Physics> ar::GameScene::makePhysics() const {
+    auto ballFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(texture::game::ball);
+    const auto ballWidth = ballFrame->getOriginalSize().width;
+
+    return std::make_shared<Physics>(ballWidth * cPhysicsTicksPerPixel);
 }
 
 void ar::GameScene::addBackground() {

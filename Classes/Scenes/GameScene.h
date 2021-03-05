@@ -63,6 +63,8 @@ namespace ar {
 
     private:
 
+        std::shared_ptr<Physics> makePhysics() const;
+
         void addBackground();
 
         void addFrameShadow(float size, const cocos2d::Vec2 &offset);
