@@ -39,9 +39,11 @@ namespace {
     namespace z_order {
 
         int background = 0;
-        int shadow = 0;
-        int blocks = 2;
-        int frame = blocks + 1;
+        int shadow = background + 1;
+        int blocks = shadow + 1;
+        int platform = blocks + 1;
+        int ball = platform + 1;
+        int frame = ball + 1;
         int header = frame + 1;
         int dialog = header + 1;
 
@@ -116,10 +118,10 @@ bool ar::GameScene::init() {
     //
 
     mPlatform = makePlatform();
-    addChild(mPlatform);
+    addChild(mPlatform, z_order::platform);
 
     mBall = makeBall();
-    addChild(mBall);
+    addChild(mBall, z_order::ball);
 
     //
 
